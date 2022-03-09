@@ -7,11 +7,7 @@
     if (isset($_POST['usuario'])) {
         $usuario = utf8_decode(filter_var($_POST['usuario'], FILTER_SANITIZE_STRING));
         $password = utf8_decode($_POST['pass']);
-        //$password = hash('sha512', $password);
-        $llave = 'llave';
-        $statement = $conexion->prepare("SELECT AES_DECRYPT(nick_usuario,'$llave'), 
-        AES_DECRYPT(pass,'$llave'),tipo FROM usuario WHERE AES_DECRYPT(nick_usuario,'$llave') = 
-        :usuario AND AES_DECRYPT(pass,'$llave') = :pass AND estado = 1");
+        $statement = $conexion->prepare("SELECT nick_usuario,pass,tipo FROM usuario WHERE nick_usuario = :usuario AND pass = :pass AND estado = 1");
         $statement->execute(array(
                 ':usuario' => $usuario,
                 ':pass' => $password
@@ -25,7 +21,7 @@
                 header('Location: profesor_repositorio.php');
             }elseif($resultado['tipo']==='administrador'){
                 header('Location: administrador_alumnos.php');
-            }   
+            }
         }
     }
     $_POST=array();

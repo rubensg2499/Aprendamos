@@ -18,21 +18,21 @@
     <link rel="stylesheet" href="css/sb-admin.css">
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <script>
-            
+
 
             function obtenerideditar(a){
                 var opcion = a.id;
                 window.location.href = "?idMateria="+opcion;
             }
-            
-            <?php 
+
+            <?php
                 if(isset($_GET['idMateria'])){
                     $_SESSION['idMateria'] = filter_var($_GET['idMateria'],FILTER_SANITIZE_STRING);
                     header("Location: administrador_editarmateria.php");
                     $_GET = array();
                 }
-            ?>    
-        </script> 
+            ?>
+        </script>
 
 </head>
 
@@ -191,14 +191,18 @@
                                                     <?php
 
                                                     foreach ($valores as $fila) {
-                                                            $idMateria = utf8_encode($fila['clave']);
-                                                            $consulta = $conexion->prepare("SELECT * FROM profesor_materia,profesor,usuario 
+                                                            $idMateria = "HPF0";//utf8_encode($fila['clave']);
+                                                            $consulta = $conexion->prepare("SELECT * FROM profesor_materia,profesor,usuario
                                                             WHERE profesor.nick_profesor=usuario.nick_usuario  and profesor_materia.nick_profesor=
                                                             profesor.nick_profesor and clave=$idMateria;");
                                                             $consulta->execute();
-                                                            $resultado = $consulta->fetch();
-                                                            
-                                                            
+                                                            $resultado=NULL;
+                                                            if ($consulta) {
+                                                              $resultado = $consulta->fetch();
+                                                            }
+
+
+
                                                             echo "
                                                             <tr>
                                                                 <th scope='row' class='text-center'>".utf8_encode($fila['nombre'])."</th>
@@ -218,10 +222,10 @@
                                                                 <td class='text-center'> <a id='$idMateria' onclick='obtenerideditar(this);' href='#'>Editar</a> </td>
                                                             </tr>";
                                                     }
-                                                   
+
                                                     ?>
 
-                                                    
+
                                                 </tbody>
                                             </table>
                                         </div>

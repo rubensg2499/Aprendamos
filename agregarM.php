@@ -13,7 +13,7 @@
         $_SESSION['ProfeAsig'] = $_POST['ProfeAsig'];
         $_SESSION['Semestre'] = $_POST['Semestre'];
         $_SESSION['Grupo'] = $_POST['Grupo'];
-        
+
         $NombreM = utf8_decode(filter_var($_SESSION['NombreM'],FILTER_SANITIZE_STRING));
         $ClaveM = utf8_decode(filter_var($_SESSION['ClaveM'],FILTER_SANITIZE_STRING));
         $CreditoMateria = utf8_decode(filter_var($_SESSION['CreditoMateria'],FILTER_SANITIZE_STRING));
@@ -22,14 +22,13 @@
         $Semestre = utf8_decode(filter_var($_SESSION['Semestre'],FILTER_SANITIZE_STRING));
         $Grupo = utf8_decode(filter_var($_SESSION['Grupo'],FILTER_SANITIZE_STRING));
         $resultado = false;
-        $llave = 'llave';
-        $sql="SELECT AES_DECRYPT(nick_administrador,'llave') as nick_administrador FROM administrador LIMIT 1";
-            
+        $sql="SELECT nick_administrador FROM administrador LIMIT 1";
+
         $statement = $conexion->prepare($sql);
         $statement->execute();
         $administrador = $statement->fetch();
 
-            $statement = $conexion->prepare("INSERT INTO materia VALUES(:clave,:NombreM,:HorasMateria,:CreditosMateria,:Semestre,:Grupo,AES_ENCRYPT(:nick_admin,'$llave'))");
+            $statement = $conexion->prepare("INSERT INTO materia VALUES(:clave,:NombreM,:HorasMateria,:CreditosMateria,:Semestre,:Grupo,:nick_admin)");
             $statement->execute(array(
                 ':clave' => $ClaveM,
                 ':NombreM' => $NombreM,
@@ -41,12 +40,12 @@
             ));
             echo $ProfeAsig;
             if($ProfeAsig!=0){
-                $statement = $conexion->prepare("INSERT INTO profesor_materia VALUES( AES_ENCRYPT(:nick_profesor,'$llave'), :clave)");
+                $statement = $conexion->prepare("INSERT INTO profesor_materia VALUES( :nick_profesor, :clave)");
                 $statement->execute(array(
                     ':nick_profesor' => $ProfeAsig,
                     ':clave' => $ClaveM
-                )); 
-            }        
+                ));
+            }
     }
     header('Location: administrador_planestudios.php');
     }else{
@@ -54,5 +53,5 @@
         header('Location: index.php');
         die();
     }
-    
+
 ?>
