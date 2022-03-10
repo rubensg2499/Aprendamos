@@ -14,7 +14,7 @@
             $_SESSION['Semestre'] = $_POST['Semestre'];
             $_SESSION['Grupo'] = $_POST['Grupo'];
 
-            $NombreM = utf8_decode(filter_var($_SESSION['NombreM'],FILTER_SANITIZE_STRING));
+            $NombreM = filter_var($_SESSION['NombreM'],FILTER_SANITIZE_STRING);
             $ClaveM = utf8_decode(filter_var($_SESSION['ClaveM'],FILTER_SANITIZE_STRING));
             $CreditoMateria = utf8_decode(filter_var($_SESSION['CreditoMateria'],FILTER_SANITIZE_STRING));
             $HorasM = utf8_decode(filter_var($_SESSION['HorasMateria'],FILTER_SANITIZE_STRING));
@@ -30,7 +30,7 @@
                     ':HorasMateria' => $HorasM,
                     ':CreditosMateria' => $CreditoMateria
                 ));
-                
+
                 if (!($Semestre === '0')) {
                     $statement1 = $conexion->prepare("UPDATE materia SET semestre = :Semestre WHERE clave = :clave");
                     $statement1->execute(array(
@@ -38,7 +38,8 @@
                     ':Semestre' => $Semestre
                 ));
                 }
-                if (!($ProfeAsig === 0)) {
+                if (!($ProfeAsig === '0')) {
+                    echo "HOLA MUNDO";
                     $consulta = $conexion->prepare("SELECT * FROM profesor_materia where nick_profesor = AES_ENCRYPT(:nick_profesor,'$llave') AND clave =:clave");
                     $consulta->execute(array(
                         ':nick_profesor' => $ProfeAsig,
@@ -59,7 +60,7 @@
                             ':clave' => $ClaveM
                         ));
                     }
-                    
+
                 }
 
                 if (!($Grupo === '0')) {
@@ -68,10 +69,10 @@
                     $statement2->execute(array(
                     ':Grupo' => $Grupo,
                     ':clave' => $ClaveM
-                )); 
+                ));
                 }
-                
-            
+
+
         }
         header('Location: administrador_planestudios.php');
     }else{
@@ -79,5 +80,5 @@
         header('Location: index.php');
         die();
     }
-    
+
 ?>
