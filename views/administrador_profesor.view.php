@@ -134,7 +134,7 @@
                                             class="d-sm-flex align-items-center justify-content-between mb-2 m-2 form-group">
                                             <h5 class=" mb-0 text-gray-800">Profesores habilitados</h5>
                                             <!--<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
-                                            
+
                                             <div>
                                                 <input type="checkbox" id="select1">
                                                 <label for="select1" class="ml-1">Seleccionar todo</label>
@@ -168,24 +168,17 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody id="Tabla">
-                                                    <?php
-
-                                                    foreach ($registro as $fila) {
-                                                            echo "
-                                                            <tr>
-                                                                <th scope='row' class='text-center'><input type='checkbox' class='chk1' id='".$fila['nick_usuario']."' name='checkSelect[]' value='".$fila['nick_usuario']."'></th>
-                                                                <td class='text-center' for='".$fila['nick_usuario']."'>".$fila['cvu']."</td>
-                                                                <td class='text-center'>".utf8_encode($fila['nombre'])." ".utf8_encode($fila['ape_pat'])." ".utf8_encode($fila['ape_mat'])."</td>
-                                                                <td class='text-center'>".utf8_encode($fila['grado_maximo_estudios'])."</td>
-                                                            </tr>";
-                                                    }
-                                                   
-                                                    ?>
-
-                                                    
+                                                  <?php foreach ($registro as $fila): ?>
+                                                    <tr>
+                                                      <th scope="row" class="text-center"><input type="checkbox" class="chk1" id="<?php echo $fila['nick_usuario']; ?>" name="checkSelect[]" value="<?php echo  $fila['nick_usuario']; ?>"></th>
+                                                      <td class="text-center" for="<?php echo $fila['nick_usuario']; ?>"><?php echo $fila['cvu']; ?></td>
+                                                      <td class="text-center"><?php echo $fila['nombre'].' '.$fila['ape_pat'].' '.$fila['ape_mat']; ?></td>
+                                                      <td class="text-center"><?php echo $fila['grado_maximo_estudios']; ?></td>
+                                                    </tr>
+                                                  <?php endforeach; ?>
                                                 </tbody>
                                             </table>
-                                    
+
                                     </div>
                                     <div class=" text-right m-2 ">
                                         <a href="#deshabilitar" role="button" lass="btn btn-large btn-primary"
@@ -207,10 +200,10 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                                                        
+
                                                         <input type="submit" class="btn btn-danger" name="deshabilitar" value="Deshabilitar">
-                                                        
-                                                        
+
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -237,7 +230,7 @@
                                             class="d-sm-flex align-items-center justify-content-between mb-2 m-2 form-group">
                                             <h5 class=" mb-0 text-gray-800">Profesores deshabilitados</h5>
                                             <!--<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
-                                            
+
                                             <div>
                                                 <input type="checkbox" id="select2">
                                                 <label for="select2" class="ml-1">Seleccionar todo</label>
@@ -272,21 +265,14 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody id="Tabla2">
-                                                    <?php
-
-                                                    foreach ($registro2 as $fila2) {
-                                                            echo "
-                                                            <tr>
-                                                                <th scope='row' class='text-center'><input type='checkbox' class='chk2' id='".$fila2['nick_usuario']."' name='checkSelect2[]' value='".$fila2['nick_usuario']."'></th>
-                                                                <td class='text-center' for='".$fila2['nick_usuario']."'>".$fila2['cvu']."</td>
-                                                                <td class='text-center'>".utf8_encode($fila2['nombre'])." ".utf8_encode($fila2['ape_pat'])." ".utf8_encode($fila2['ape_mat'])."</td>
-                                                                <td class='text-center'>".utf8_encode($fila2['grado_maximo_estudios'])."</td>
-                                                            </tr>";
-                                                    }
-                                                   
-                                                    ?>
-
-                                                    
+                                                    <?php foreach ($registro2 as $fila): ?>
+                                                      <tr>
+                                                        <th scope="row" class="text-center"><input type="checkbox" class="chk2" id="<?php echo $fila['nick_usuario']; ?>" name="checkSelect2[]" value="<?php echo  $fila['nick_usuario']; ?>"></th>
+                                                        <td class="text-center" for="<?php echo $fila['nick_usuario']; ?>"><?php echo $fila['cvu']; ?></td>
+                                                        <td class="text-center"><?php echo $fila['nombre'].' '.$fila['ape_pat'].' '.$fila['ape_mat']; ?></td>
+                                                        <td class="text-center"><?php echo $fila['grado_maximo_estudios']; ?></td>
+                                                      </tr>
+                                                    <?php endforeach; ?>
                                                 </tbody>
                                         </table>
                                     </div>
@@ -383,7 +369,7 @@
     <script src="js/sb-admin-2.min.js"></script>
 
     <script>
-        
+
         $("#select1").on("click", function() {
           $(".chk1").prop("checked", this.checked);
         });
@@ -431,7 +417,7 @@
 
         });
     </script>
-    
+
 
 
 </body>

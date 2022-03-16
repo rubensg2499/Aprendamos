@@ -4,15 +4,15 @@
     if (isset($_SESSION['usuario'])) {
     	$id = $_SESSION['idMateria'];
 	    $llave = 'llave';
-	    $statement1 = $conexion->prepare("SELECT clave, nombre, horas, creditos, semestre FROM materia WHERE clave=:idMateria;");
+	    $statement1 = $conexion->prepare("SELECT clave, nombre, horas, creditos, semestre, grupo FROM materia WHERE clave=:idMateria;");
 	    $statement1->execute(array(':idMateria' => $id));
 	    $materia = $statement1->fetch();
-	    $clave = utf8_encode($materia['clave']);
+	    $clave = $materia['clave'];
 	    $nombre = $materia['nombre'];
-	    $horas = utf8_encode($materia['horas']);
-	    $creditos = utf8_encode($materia['creditos']);
-	    $semestre = utf8_encode($materia['semestre']);
-
+	    $horas = $materia['horas'];
+	    $creditos = $materia['creditos'];
+	    $semestre = $materia['semestre'];
+      $grupo = $materia['grupo'];
 	    $statement2 = $conexion->prepare("SELECT AES_DECRYPT(nick_profesor,'llave') as nombreP FROM profesor_materia WHERE clave=:idMateria;");
 	    $statement2->execute(array(':idMateria' => $id));
 	    $profe = $statement2->fetch();

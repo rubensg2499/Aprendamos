@@ -15,12 +15,12 @@
             $_SESSION['Grupo'] = $_POST['Grupo'];
 
             $NombreM = filter_var($_SESSION['NombreM'],FILTER_SANITIZE_STRING);
-            $ClaveM = utf8_decode(filter_var($_SESSION['ClaveM'],FILTER_SANITIZE_STRING));
-            $CreditoMateria = utf8_decode(filter_var($_SESSION['CreditoMateria'],FILTER_SANITIZE_STRING));
-            $HorasM = utf8_decode(filter_var($_SESSION['HorasMateria'],FILTER_SANITIZE_STRING));
-            $ProfeAsig = utf8_decode(filter_var($_SESSION['ProfeAsig'],FILTER_SANITIZE_STRING));
-            $Semestre = utf8_decode(filter_var($_SESSION['Semestre'],FILTER_SANITIZE_STRING));
-            $Grupo = utf8_decode(filter_var($_SESSION['Grupo'],FILTER_SANITIZE_STRING));
+            $ClaveM = filter_var($_SESSION['ClaveM'],FILTER_SANITIZE_STRING);
+            $CreditoMateria = filter_var($_SESSION['CreditoMateria'],FILTER_SANITIZE_STRING);
+            $HorasM = filter_var($_SESSION['HorasMateria'],FILTER_SANITIZE_STRING);
+            $ProfeAsig = filter_var($_SESSION['ProfeAsig'],FILTER_SANITIZE_STRING);
+            $Semestre = filter_var($_SESSION['Semestre'],FILTER_SANITIZE_STRING);
+            $Grupo = filter_var($_SESSION['Grupo'],FILTER_SANITIZE_STRING);
             $resultado = false;
             $llave = 'llave';
                 $statement = $conexion->prepare("UPDATE materia SET nombre = :NombreM, horas = :HorasMateria, creditos = :CreditosMateria WHERE clave = :clave");
@@ -60,7 +60,6 @@
                             ':clave' => $ClaveM
                         ));
                     }
-
                 }
 
                 if (!($Grupo === '0')) {
@@ -71,8 +70,6 @@
                     ':clave' => $ClaveM
                 ));
                 }
-
-
         }
         header('Location: administrador_planestudios.php');
     }else{

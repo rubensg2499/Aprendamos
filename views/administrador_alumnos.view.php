@@ -114,7 +114,7 @@
 
                 </nav>
                 <!-- End of Topbar -->
-                
+
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
@@ -134,7 +134,7 @@
                                             class="d-sm-flex align-items-center justify-content-between mb-2 m-2 form-group">
                                             <h5 class="mb-0 text-gray-800">Alumnos habilitados</h5>
                                             <!--<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
-                                            
+
                                             <div>
                                                 <input type="checkbox" id="select1">
                                                 <label for="select1" class="ml-1">Seleccionar todo</label>
@@ -175,17 +175,17 @@
                                                             <tr>
                                                                 <th scope='row' class='text-center'><input type='checkbox' class='chk1' id='".$fila['nick_usuario']."' name='checkSelect[]' value='".$fila['nick_usuario']."'> </th>
                                                                 <td class='text-center' for='".$fila['nick_usuario']."'>".$fila['matricula']."</td>
-                                                                <td class='text-center'>".utf8_encode($fila['nombre'])." ".utf8_encode($fila['ape_pat'])." ".utf8_encode($fila['ape_mat'])."</td>
-                                                                <td class='text-center'>".utf8_encode($fila['grupo'])."</td>
+                                                                <td class='text-center'>".$fila['nombre']." ".$fila['ape_pat']." ".$fila['ape_mat']."</td>
+                                                                <td class='text-center'>".$fila['grupo']."</td>
                                                             </tr>";
                                                     }
-                                                   
+
                                                     ?>
 
-                                                    
+
                                                 </tbody>
                                             </table>
-                                    
+
                                     </div>
                                     <div class=" text-right m-2 ">
                                         <a href="#deshabilitar" role="button" lass="btn btn-large btn-primary"
@@ -207,10 +207,10 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                                                        
+
                                                         <input type="submit" class="btn btn-danger" name="deshabilitar" value="Deshabilitar">
-                                                        
-                                                        
+
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -237,7 +237,7 @@
                                             class="d-sm-flex align-items-center justify-content-between mb-2 m-2 form-group">
                                             <h5 class=" text-gray-800">Alumnos deshabilitados</h5>
                                             <!--<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
-                                            
+
                                             <div>
                                                 <input type="checkbox" id="select2">
                                                 <label for="select2" class="ml-1">Seleccionar todo</label>
@@ -249,11 +249,11 @@
                                                         placeholder="Buscar" arial-label="Buscar"
                                                         aria-describedby="basic-addon2">
                                                     <div class="input-group-append">
-                                                        
+
                                                         <button class="btn btn-success" disabled type="button">
                                                             <i class="fa fa-search"></i>
                                                         </button>
-                                                        
+
                                                     </div>
 
                                                 </div>
@@ -282,14 +282,14 @@
                                                             <tr>
                                                                 <th scope='row' class='text-center'><input type='checkbox' class='chk2' id='".$fila2['nick_usuario']."' name='checkSelect2[]' value='".$fila2['nick_usuario']."'></th>
                                                                 <td class='text-center' for='".$fila2['nick_usuario']."'>".$fila2['matricula']."</td>
-                                                                <td class='text-center'>".utf8_encode($fila2['nombre'])." ".utf8_encode($fila2['ape_pat'])." ".utf8_encode($fila2['ape_mat'])."</td>
-                                                                <td class='text-center'>".utf8_encode($fila2['grupo'])."</td>
+                                                                <td class='text-center'>".$fila2['nombre']." ".$fila2['ape_pat']." ".$fila2['ape_mat']."</td>
+                                                                <td class='text-center'>".$fila2['grupo']."</td>
                                                             </tr>";
                                                     }
-                                                   
+
                                                     ?>
 
-                                                    
+
                                                 </tbody>
                                         </table>
                                     </div>
@@ -327,12 +327,12 @@
                         </div>
                     </div>
 
-                    
-                    
+
+
 
                 </div>
                 <!-- /.container-fluid -->
-                
+
             </div>
             <!-- End of Main Content -->
 
@@ -384,9 +384,9 @@
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-    
+
     <script>
-        
+
         $("#select1").on("click", function() {
           $(".chk1").prop("checked", this.checked);
         });
@@ -424,7 +424,7 @@
             });
           });
 
-          
+
           $("#Buscar2").on("keyup", function() {
             var value = $(this).val().toLowerCase();
             $("#Tabla2 tr").filter(function() {
