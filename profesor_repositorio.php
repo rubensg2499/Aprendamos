@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 include("conexion.php");
 if (isset($_SESSION['usuario'])) {
@@ -11,4 +12,3 @@ if (isset($_SESSION['usuario'])) {
     header('Location: index.php');
     die();
 }
-?>

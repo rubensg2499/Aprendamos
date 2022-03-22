@@ -115,8 +115,8 @@
 
                                                     <div class="form-group">
                                                         <select class="form-control" name="respuesta_correcta">
-                                                            <?php 
-                                                            switch($respuesta){
+                                                            <?php
+                                                            switch ($respuesta) {
                                                                 case "a":
                                                                     echo "<option selected>a)</option><option>b)</option><option>c)</option><option>d)</option>";
                                                                 break;
@@ -144,7 +144,7 @@
                                                     <div class="form-group col-5">
                                                         <select class="form-control " name="estado_reactivo">
                                                             <?php
-                                                            switch($estado){
+                                                            switch ($estado) {
                                                                 case "A medio terminar":
                                                                     echo "<option selected>A medio terminar</option><option>Disponible</option><option>Obsoleto</option>";
                                                                 break;
@@ -210,7 +210,7 @@
                                 </div>
                                 <div class="card-body">
                                     <?php
-                                            switch($tipo){
+                                            switch ($tipo) {
                                                 case "Directo":
                                                     echo " <p>Las preguntas directas se construyen de la siguiente manera. Escriba la pregunta y dentro de los cuadros de texto coloqué una única respuesta por cada opción.
                                                     <br>Ejemplo:

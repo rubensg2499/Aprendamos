@@ -1,11 +1,11 @@
-<?php 
-                if(isset($_GET['reactivo'])){
-                    $_SESSION['reactivo'] = filter_var($_GET['reactivo'],FILTER_SANITIZE_STRING);
-                    
-                    header('Location: profesor_editarreactivo.php');
-                    $_GET = array();
-                }
-            ?> 
+<?php
+if (isset($_GET['reactivo'])) {
+    $_SESSION['reactivo'] = filter_var($_GET['reactivo'], FILTER_SANITIZE_STRING);
+
+    header('Location: profesor_editarreactivo.php');
+    $_GET = array();
+}
+            ?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -136,26 +136,35 @@
                             <div class="card shadow">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header">
-                                    <h5 class="m-0 text-gray-800"><?php if(isset($_SESSION['nombre_asignatura'])){echo $_SESSION['nombre_asignatura']; if(isset($_GET['valor_filtro']) && $_GET['valor_filtro']=='Propios'){echo "<h6>(Propios)</h6>";}else{echo "<h6>(Todos)</h6>";}}else{echo "Todavía no tiene reactivos agregados para esta materia.";} ?>
+                                    <h5 class="m-0 text-gray-800"><?php if (isset($_SESSION['nombre_asignatura'])) {
+                echo $_SESSION['nombre_asignatura'];
+                if (isset($_GET['valor_filtro']) && $_GET['valor_filtro']=='Propios') {
+                    echo "<h6>(Propios)</h6>";
+                } else {
+                    echo "<h6>(Todos)</h6>";
+                }
+            } else {
+                echo "Todavía no tiene reactivos agregados para esta materia.";
+            } ?>
                                     </h5>
                                 </div>
                                 <!-- Card Body -->
 
-                                <?php 
-                                    while($fila = $statement1->fetch()){
-                                        $enunciado = utf8_encode($fila['enunciado']);
-                                        $a = utf8_encode($fila['inciso_a_texto']);
-                                        $b = utf8_encode($fila['inciso_b_texto']);
-                                        $c = utf8_encode($fila['inciso_c_texto']);
-                                        $d = utf8_encode($fila['inciso_d_texto']);
-                                        $complejidad = utf8_encode($fila['complejidad']);
-                                        $fecha = utf8_encode($fila['fecha_adicion']);
-                                        $estado = utf8_encode($fila['estado']);
-                                        $usuario = utf8_encode($fila['u']);
-                                        $id_reactivo = utf8_encode($fila['id_reactivo']);
-                                        if(isset($_GET['valor_filtro']) && $_GET['valor_filtro']=='Propios'){
-                                            if($_SESSION['usuario']===$usuario){
-                                                echo "<div class='card border-left-success  m-3'>
+  <?php
+  while ($fila = $statement1->fetch()) {
+      $enunciado = $fila['enunciado'];
+      $a = $fila['inciso_a_texto'];
+      $b = $fila['inciso_b_texto'];
+      $c = $fila['inciso_c_texto'];
+      $d = $fila['inciso_d_texto'];
+      $complejidad = $fila['complejidad'];
+      $fecha = $fila['fecha_adicion'];
+      $estado = $fila['estado'];
+      $usuario = $fila['u'];
+      $id_reactivo = $fila['id_reactivo'];
+      if (isset($_GET['valor_filtro']) && $_GET['valor_filtro']=='Propios') {
+          if ($_SESSION['usuario']===$usuario) {
+              echo "<div class='card border-left-success  m-3'>
                                                 <div class='card-body '>
                                                     <div class='row '>
                                                         <div class='col'>
@@ -179,11 +188,11 @@
                                                         </div>
                                                     </div>
                                                     <div class='text-right'>";
-                                                echo "<a onclick='obtenerideditar(this);' href='profesor_editarreactivo.php' id='$id_reactivo'>Editar</a>";
-                                                 echo "</div></div></div>";
-                                            }
-                                        }else{
-                                            echo "<div class='card border-left-success  m-3'>
+              echo "<a onclick='obtenerideditar(this);' href='profesor_editarreactivo.php' id='$id_reactivo'>Editar</a>";
+              echo "</div></div></div>";
+          }
+      } else {
+          echo "<div class='card border-left-success  m-3'>
                                             <div class='card-body '>
                                                 <div class='row '>
                                                     <div class='col'>
@@ -204,19 +213,18 @@
                                                             <li>CVU : XXXXXXXXXX</li>
                                                         </ul>
                                                         <hr>
-        
+
                                                     </div>
                                                 </div>
                                                 <div class='text-right'>";
-                                                if($_SESSION['usuario']===$usuario){
-                                                    echo "<a onclick='obtenerideditar(this);' id='$id_reactivo' href='#'>Editar</a>";
-                                                }else{
-                                                    echo "<p>No se puede editar.</p>";
-                                                }
-                                                echo "</div></div></div>";
-                                        }
-                                       
-                                    }
+          if ($_SESSION['usuario']===$usuario) {
+              echo "<a onclick='obtenerideditar(this);' id='$id_reactivo' href='#'>Editar</a>";
+          } else {
+              echo "<p>No se puede editar.</p>";
+          }
+          echo "</div></div></div>";
+      }
+  }
                                 ?>
                             </div>
 
@@ -342,8 +350,8 @@
                 var opcion = a.id;
                 window.location.href = "?reactivo="+opcion;
             }
-               
-        </script> 
+
+        </script>
 </body>
 
 </html>

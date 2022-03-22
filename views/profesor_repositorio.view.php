@@ -1,10 +1,10 @@
-<?php 
-        if(isset($_GET['materia'])){
-            $_SESSION['materia'] = filter_var($_GET['materia'],FILTER_SANITIZE_STRING);
+<?php
+        if (isset($_GET['materia'])) {
+            $_SESSION['materia'] = filter_var($_GET['materia'], FILTER_SANITIZE_STRING);
             header("Location: profesor_repositoriomateria.php");
             $_GET = array();
         }
-    ?> 
+    ?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -20,7 +20,7 @@
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="css/sb-admin.css">
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    
+
 </head>
 
 <body id="page-top">
@@ -111,11 +111,11 @@
                                     <h5 class="m-0 text-gray-800">Materias</h5>
                                 </div>
                                 <!-- Card Body -->
-                                <?php 
+                                <?php
                                     $semestres = array(false,false,false,false,false,false,false,false,false,false);
                                     $i=0;
-                                    while($fila = $statement1->fetch()){
-                                        switch($fila['semestre']){
+                                    while ($fila = $statement1->fetch()) {
+                                        switch ($fila['semestre']) {
                                             case '1': $semestres[0]=true; break;
                                             case '2': $semestres[1]=true; break;
                                             case '3': $semestres[2]=true; break;
@@ -128,39 +128,39 @@
                                             case '10': $semestres[9]=true; break;
                                         }
                                     }
-                                    try{
-                                        for($i=0;$i<10;$i++){
-                                            if($semestres[$i]){
-                                                    $sem=$i+1;
-                                                    echo "<div class='card border-left-success m-3'>
+                                    try {
+                                        for ($i=0;$i<10;$i++) {
+                                            if ($semestres[$i]) {
+                                                $sem=$i+1;
+                                                echo "<div class='card border-left-success m-3'>
                                                                 <div class='card-header'>Semestre $sem</div>
                                                                 <div class='card-body'>
                                                                     <ul class='list-group'>";
-                                                    $statement2 = $conexion->prepare("SELECT nick_profesor, materia.clave, nombre, semestre FROM profesor_materia,materia WHERE profesor_materia.clave=materia.clave AND AES_DECRYPT(nick_profesor,'$llave') = :usuario ;");
-                                                    $statement2->execute(array(':usuario' => $usuario));
-                                                    while($reg = $statement2->fetch()){
-                                                        $nom=utf8_encode($reg['nombre']);
-                                                        $id=utf8_encode($reg['clave']);
-                                                        if($reg['semestre']==$sem){
-                                                            $statement3 = $conexion->prepare("SELECT count(*) as num FROM reactivo WHERE clave = :id;");
-                                                            $statement3->execute(array(':id' => $id));
-                                                            $reg2 = $statement3->fetch();
-                                                            $num = $reg2['num']; 
-                                                            echo "<a id='$id' onclick='obtenerid(this);' href='#'>";
-                                                            echo "<li class='list-group-item d-flex justify-content-between list-group-item-action align-items-center list-group-item-success'>";
-                                                            echo $nom;
-                                                            echo "<span class='badge badge-primary badge-pill'>$num</span>";
-                                                            echo "</li>";
-                                                            echo "</a>";
-                                                        }
-                                                    }                
-                                                    echo "</ul></div></div>";
+                                                $statement2 = $conexion->prepare("SELECT nick_profesor, materia.clave, nombre, semestre FROM profesor_materia,materia WHERE profesor_materia.clave=materia.clave AND AES_DECRYPT(nick_profesor,'$llave') = :usuario ;");
+                                                $statement2->execute(array(':usuario' => $usuario));
+                                                while ($reg = $statement2->fetch()) {
+                                                    $nom = $reg['nombre'];
+                                                    $id = $reg['clave'];
+                                                    if ($reg['semestre']==$sem) {
+                                                        $statement3 = $conexion->prepare("SELECT count(*) as num FROM reactivo WHERE clave = :id;");
+                                                        $statement3->execute(array(':id' => $id));
+                                                        $reg2 = $statement3->fetch();
+                                                        $num = $reg2['num'];
+                                                        echo "<a id='$id' onclick='obtenerid(this);' href='#'>";
+                                                        echo "<li class='list-group-item d-flex justify-content-between list-group-item-action align-items-center list-group-item-success'>";
+                                                        echo $nom;
+                                                        echo "<span class='badge badge-primary badge-pill'>$num</span>";
+                                                        echo "</li>";
+                                                        echo "</a>";
+                                                    }
+                                                }
+                                                echo "</ul></div></div>";
                                             }
                                         }
-                                    }catch(PDPException $e){
+                                    } catch (PDPException $e) {
                                         echo $e->getMessage();
                                     }
-                                    
+
                                 ?>
                             </div>
                         </div>
@@ -234,8 +234,8 @@
             var opcion = a.id;
             window.location.href = "?materia="+opcion;
         }
-    </script>    
-                               
+    </script>
+
 </body>
 
 </html>

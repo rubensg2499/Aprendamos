@@ -108,7 +108,7 @@
                                             class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                             <div class="row m-2">
                                                 <div class="ml-5 col-3 text-center">
-                                                
+
                                                     <img src="<?php echo $img['imagen_perfil'];?>" width="100" height="100" class="img-profile rounded-circle" alt="avatar">
 
                                                 </div>
@@ -140,12 +140,12 @@
                                                                             <div class="text">
                                                                                 <h2 class="h4 mb-2 text-gray-800 font-weight-bold"><?php echo $usuario ?></h2>
                                                                                 <br>
-                                                                                <h2 class="h6 mb-2 text-gray-800"><strong>Nombre:</strong> <?php echo utf8_encode($alumno['nombre']) .' '. utf8_encode($alumno['ape_pat']) .' '. utf8_encode($alumno['ape_mat'])?></h2>
-                                                                                <h2 class="h6 mb-2 text-gray-800"><strong>Correo electr&oacute;nico:</strong> <?php echo utf8_encode($alumno['correo'])?></h2>
-                                                                                <h2 class="h6 mb-2 text-gray-800"><strong>Fecha nacimiento:</strong> <?php echo utf8_encode($alumno['fecha_nacimiento'])?></h2>
-                                                                                <h2 class="h6 mb-2 text-gray-800"><strong>Escuela de procedencia:</strong> <?php echo utf8_encode($alumno['escuela_procedencia'])?></h2>
-                                                                                <?php if(!empty($alumno['matricula'])){ ?>
-                                                                                    <h2 class="h6 mb-5 text-gray-800"><strong>Matr&iacute;cula:</strong> <?php echo utf8_encode($alumno['matricula'])?></h2>
+                                                                                <h2 class="h6 mb-2 text-gray-800"><strong>Nombre:</strong> <?php echo $alumno['nombre'] .' '. $alumno['ape_pat'] .' '. $alumno['ape_mat']; ?></h2>
+                                                                                <h2 class="h6 mb-2 text-gray-800"><strong>Correo electr&oacute;nico:</strong> <?php echo $alumno['correo']; ?></h2>
+                                                                                <h2 class="h6 mb-2 text-gray-800"><strong>Fecha nacimiento:</strong> <?php echo $alumno['fecha_nacimiento']; ?></h2>
+                                                                                <h2 class="h6 mb-2 text-gray-800"><strong>Escuela de procedencia:</strong> <?php echo $alumno['escuela_procedencia']; ?></h2>
+                                                                                <?php if (!empty($alumno['matricula'])) { ?>
+                                                                                    <h2 class="h6 mb-5 text-gray-800"><strong>Matr&iacute;cula:</strong> <?php echo $alumno['matricula']; ?></h2>
                                                                                 <?php } ?>
                                                                             </div>
                                                                         </div>
@@ -214,7 +214,7 @@
                                                 </div>
 
                                                 <div class="row m-2">
-                                                    <?php if(empty($alumno['matricula']) && (($fechahoy >= $fechainicio) && ($fechahoy <= $fechafinal))){ ?>
+                                                    <?php if (empty($alumno['matricula']) && (($fechahoy >= $fechainicio) && ($fechahoy <= $fechafinal))) { ?>
                                                         <a href="#actualizacion" data-toggle="modal">Actualización al curso normal</a>
                                                     <?php } ?>
                                                 </div>
@@ -223,7 +223,7 @@
                                                     <input type="submit" name="guardar" value="Guardar cambios" class="btn btn-success">
                                                     <a id="m1" href="#guardar" data-toggle="modal"></a>
                                                 </div>
-                                                
+
                                             </div>
 
                                         </div>
@@ -309,7 +309,7 @@
     <!---------------------------Actualización al curso normal----------------------------->
 <form method="POST" name="form_matricula" action="alumno_editar_perfil.php">
     <div class="modal fade" id="actualizacion">
-    
+
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Header de la ventana -->
@@ -323,7 +323,7 @@
                     <div class="text-body text-gray-900">
                         <h6> Para actualizar tu perfil al curso normal necesitamos su matr&iacute;cula</h6>
                     </div>
-                    
+
                         <div class="form-group">
                             <div class="form-label-group">
                                 <input type="text" name="matricula" id="matricula" class="form-control"
@@ -331,7 +331,7 @@
                                     <label for="matricula">Matr&iacute;cula</label>
                             </div>
                         </div>
-                    
+
 
                 </div>
 
@@ -344,7 +344,7 @@
                 </div>
             </div>
         </div>
-       
+
     </div>
 </form>
 
@@ -361,7 +361,7 @@
     <script src="js/sb-admin-2.min.js"></script>
 
     <?php
-        if (isset($_POST['guardar'])){
+        if (isset($_POST['guardar'])) {
             $email = $_POST['correo'];
             if (filter_var($email, FILTER_VALIDATE_EMAIL) || !empty($grupo) || !empty($imgFile)) {
                 echo "<script>";
@@ -370,7 +370,7 @@
             }
         }
 
-        if (isset($_POST['btn_matri'])){
+        if (isset($_POST['btn_matri'])) {
             echo "<script>";
             echo 'document.getElementById("m2").click();';
             echo "</script>";

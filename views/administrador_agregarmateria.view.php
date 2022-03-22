@@ -144,7 +144,7 @@
 
                                                 <div class="form-group">
                                                     <div class="form-label-group">
-                                                        <input type="text" id="ClaveMateria" class="form-control" name="ClaveM" 
+                                                        <input type="text" id="ClaveMateria" class="form-control" name="ClaveM"
                                                             placeholder="Clave de la materia" required="required"
                                                             autofocus="autofocus">
                                                         <label for="ClaveMateria">Clave de la materia</label>
@@ -152,18 +152,18 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group">
+                                                <!--<div class="form-group">
                                                     <div class="form-label-group">
-                                                        <input type="number" id="CreditosMateria" class="form-control" name="CreditoMateria" 
+                                                        <input type="number" id="CreditosMateria" class="form-control" name="CreditoMateria"
                                                             placeholder="Créditos de la materia" required="required"
                                                             autofocus="autofocus">
                                                         <label for="CreditosMateria">Créditos de la materia</label>
 
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 <div class="form-group">
                                                     <div class="form-label-group">
-                                                        <input type="number" id="HorasMateria" class="form-control" name="HorasMateria" 
+                                                        <input type="number" id="HorasMateria" class="form-control" name="HorasMateria"
                                                             placeholder="Horas totales de la materia"
                                                             required="required" autofocus="autofocus">
                                                         <label for="HorasMateria">Horas totales de la materia</label>
@@ -174,42 +174,24 @@
                                                 <div class="form-group">
                                                     <div class="form-label-group">
 
-                                                        <select id="ProfAsig" class="form-control" required="required"
-                                                            name="ProfeAsig" size="1">
+                                                        <select id="ProfAsig" class="form-control" required="required" name="ProfeAsig" size="1">
                                                             <option value="0">Profesor asignado</option>
-                                                            <?php
-                                                            $indice=1; 
-                                                            foreach ($nombreProf as $regs) {
-                                                                echo "<option value='".utf8_encode($regs['nick_profesor'])."'>".utf8_encode($regs['nombreP'])." ".utf8_encode($regs['ape_patP'])." ".utf8_encode($regs['ape_matP'])."</option>";    
-                                                                $indice++;
-                                                            }
-
-
-                                                            ?>
-                                                            
-                                                            
+                                                            <?php foreach ($nombreProf as $regs): ?>
+                                                            <option value="<?php echo $regs['nick_profesor']; ?>"><?php echo $regs['nombreP'].' '.$regs['ape_patP'].' '.$regs['ape_matP']; ?></option>
+                                                            <?php endforeach; ?>
                                                         </select>
-
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="form-label-group">
 
-                                                        <select id="Grupo" class="form-control" required="required"
-                                                            name="Grupo" size="1">
-                                                            <option value="0">Grupo</option>
-                                                            <option value="4">4</option>
-                                                            <option value="104">104</option>
-                                                            <option value="204">204</option>
-                                                            <option value="304">304</option>
-                                                            <option value="404">404</option>
-                                                            <option value="504">504</option>
-                                                            <option value="604">604</option>
-                                                            <option value="704">704</option>
-                                                            <option value="804">804</option>
-                                                            <option value="904">904</option>
-                                                            <option value="1004">1004</option>
-                                                        </select>
+                                                      <?php $grupos = [104,204,304,404,504,604,704,804,904,1004]; ?>
+                                                      <select id="Grupo" class="form-control" required="required" name="Grupo" size="1">
+                                                          <option value="0" selected>Grupo</option>
+                                                          <?php foreach ($grupos as $g): ?>
+                                                              <option value="<?php echo $g; ?>"><?php echo $g; ?></option>
+                                                          <?php endforeach; ?>
+                                                      </select>
 
                                                     </div>
                                                 </div>
@@ -238,24 +220,24 @@
                                                     <a href="administrador_planestudios.php" class="btn btn-danger">
                                                         Cancelar </a>
                                                     <input type="submit" class="btn btn-success" name="Agregar" value="Agregar">
-                                                    <!-- MODAL PARA LA NOTIFICACIÓN 
+                                                    <!-- MODAL PARA LA NOTIFICACIÓN
                                                     <div class="modal fade" id="actualizar">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
-                                                                Header de la ventana 
+                                                                Header de la ventana
                                                                 <div class="modal-header text-gray-900">
                                                                     <h5 class="modal-title">Información</h5>
                                                                     <button type="button" class="close"
                                                                         data-dismiss="modal"
                                                                         aria-hidden="true">&times;</button>
                                                                 </div>
-                                                                Contenido de la ventana 
+                                                                Contenido de la ventana
                                                                 <div class="modal-body text-gray-900">
                                                                     <div class="text-left">
                                                                         <h6>Materia actualizada con éxito.</h6>
                                                                     </div>
                                                                 </div>
-                                                                 Foooter de la ventana 
+                                                                 Foooter de la ventana
                                                                 <div class="modal-footer">
                                                                     <button href="administrador_planestudios.php"
                                                                         type="button" class="btn btn-success"

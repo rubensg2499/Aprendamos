@@ -53,17 +53,17 @@
                             <div class="card shadow border-left-success">
                                 <!-- Card Header - Dropdown -->
 
-                               
+
 <?php
-	$statement0 = $conexion->prepare("SELECT nombre,grupo FROM materia WHERE clave = :id_mat;");
-	$statement0->execute(array(':id_mat'=>$_SESSION['id_mat']));
-	$mat = $statement0->fetch();
-	$nom_mat = utf8_encode($mat['nombre']);
-	$grupo_mat = utf8_encode($mat['grupo']);
-								
-?>								
-                               
-                               
+    $statement0 = $conexion->prepare("SELECT nombre,grupo FROM materia WHERE clave = :id_mat;");
+    $statement0->execute(array(':id_mat'=>$_SESSION['id_mat']));
+    $mat = $statement0->fetch();
+    $nom_mat = $mat['nombre'];
+    $grupo_mat = $mat['grupo'];
+
+?>
+
+
                                 <div class="card-header">
                                     <h5 class="m-0 text-gray-800"><?php echo $nom_mat; ?></h5>
                                 </div>
@@ -83,22 +83,22 @@
                                                 	<div class="col">Nombre Cuestionario</div>
                                                 	<div class="col">Complejidad</div>
                                                 </div>
-                    
+
                                                 <div class="row">
                                                     <div class="col m-3">
                                                         <div class="card">
                                                             <ul class="list-group list-group-flush ">
-                                                               
-<?php              
+
+<?php
     $i=0;
     $aux=null;
-    while($cuest = $statement1->fetch()){
-		$id_cuest = utf8_encode($cuest['id_cuestionario']);
-		$nombre_cuest = utf8_encode($cuest['nombre']);
-		$complej = utf8_encode($cuest['complejidad']);
-		$aux[$i]=$id_cuest;
-		
-		echo "
+    while ($cuest = $statement1->fetch()) {
+        $id_cuest = $cuest['id_cuestionario'];
+        $nombre_cuest = $cuest['nombre'];
+        $complej = $cuest['complejidad'];
+        $aux[$i]=$id_cuest;
+
+        echo "
 		<li class='list-group-item'>
 			<div class='row'>
 				<div class='col pl-4 custom-control custom-checkbox'>
@@ -108,16 +108,18 @@
 				<div class='col'>$complej</div>
 			</div>
 		</li>";
-		$i++;
-	}									
-	if($aux!=null){$_SESSION['reg_cue'] = $aux;}
+        $i++;
+    }
+    if ($aux!=null) {
+        $_SESSION['reg_cue'] = $aux;
+    }
 ?>
                                                             </ul>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>                                                                                                                        
+                                        </div>
                                         <div class="col-xl-6 col-xs-12">
                                             <div class="card shadow">
 
@@ -128,14 +130,14 @@
                                                 <div class="row">
                                                     <div class="col m-3">
                                                     <div class="card">
-                                                    
-                                                    
-                                                    
+
+
+
 <?php
 
 $grupo= $registro_mat['grupo'];
 
-echo "														
+echo "
 <ul class='list-group'>
 
 	<li class='list-group-item '>
@@ -146,34 +148,36 @@ echo "
 		</div>
 
 		<ul id='collapse1' class='collapse custom-control custom-checkbox ml-3'>";
-		
+
         $i=0;
         $aux1=null;
-		while($fila = $statement3->fetch()){
-			$nick = utf8_encode($fila['nick_alum']);
-			$nombre = utf8_encode($fila['nombre']);
-			$ape_pat = utf8_encode($fila['ape_pat']);
-			$ape_mat = utf8_encode($fila['ape_mat']);
-			$aux1[$i]=$nick;
-			echo "
+        while ($fila = $statement3->fetch()) {
+            $nick = $fila['nick_alum'];
+            $nombre = $fila['nombre'];
+            $ape_pat = $fila['ape_pat'];
+            $ape_mat = $fila['ape_mat'];
+            $aux1[$i]=$nick;
+            echo "
 			<li>
 				<input type='checkbox' class='custom-control-input chk1' id='chk1$nick' name='$nick'>
 				<label class='custom-control-label' for='chk1$nick'>$nombre $ape_pat $ape_mat</label>
 			</li>";
-			$i++;
-		}
-	    if($aux1!=null){$_SESSION['reg_alum']= $aux1;}
-							
-
-echo"					
-		</ul>                                            							
-	</li>    
+            $i++;
+        }
+        if ($aux1!=null) {
+            $_SESSION['reg_alum']= $aux1;
+        }
 
 
-</ul>	";													
-											
-?>														
-													</div>                                                    
+echo"
+		</ul>
+	</li>
+
+
+</ul>	";
+
+?>
+													</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -188,7 +192,7 @@ echo"
                                                 cuestionario</a>
                                         </div>
                                     </div>
-                                    
+
     <div class="modal fade" id="guar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -213,12 +217,12 @@ echo"
                 </div>
             </div>
         </div>
-    </div>                                    
-                                    
-                                    
-                                    
-                                    
-                                    
+    </div>
+
+
+
+
+
 									</form>
                                 </div>
 
@@ -279,7 +283,7 @@ echo"
                 <div class="modal-footer">
                     <button tyle="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                     <button tyle="button" class="btn btn-danger" data-dismiss="modal">No</button>
-                    
+
                     <a href="profesor_cuestionarios.php" class="btn btn-success"> Sí </a>
                 </div>
             </div>
@@ -305,7 +309,7 @@ echo"
 		$("#exampleCheck1").on("click",function(){
 			$(".chk1").prop("checked",this.checked);
 		});
-		
+
 		$(".chk1").on("click",function(){
 			if($(".chk1").length==$(".chk1:checked").length){
 				$("#exampleCheck1").prop("checked",true);

@@ -1,10 +1,10 @@
 <?php
     session_start();
-	if (isset($_SESSION['usuario'])) {
-		header('Location: index.php');
-		die();
-	}
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    if (isset($_SESSION['usuario'])) {
+        header('Location: index.php');
+        die();
+    }
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['nombre'] = $_POST['nombre'];
         $_SESSION['ape_pat'] = $_POST['ape_pat'];
         $_SESSION['ape_mat'] = $_POST['ape_mat'];
@@ -18,4 +18,3 @@
     }
     require "views/registro_alumno1.view.php";
 ?>
-

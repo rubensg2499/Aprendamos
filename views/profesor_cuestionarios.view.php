@@ -19,17 +19,17 @@
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="css/sb-admin.css">
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    
+
     	<script>
             function obtenerideditar(a){
                 var opcion = a.id;
                 window.location.href = "?id_cuest="+opcion;
-					
+
             }
 			function obtenerid_mat(a){
                 var opcion = a.id;
                 window.location.href = "?id_mat="+opcion;
-					
+
             }
 			function valorId2(a)
 			{
@@ -41,35 +41,33 @@
 			{
 				var id3=a.id;
 				window.location.href="?id_cue2="+id3;
-			}			
-            <?php 
-                if(isset($_GET['id_cuest'])){
-                    $_SESSION['id_cuest'] = filter_var($_GET['id_cuest'],FILTER_SANITIZE_STRING);
+			}
+            <?php
+                if (isset($_GET['id_cuest'])) {
+                    $_SESSION['id_cuest'] = filter_var($_GET['id_cuest'], FILTER_SANITIZE_STRING);
                     $_GET = array();
-					header("Location: profesor_editarcuestionario.php");
+                    header("Location: profesor_editarcuestionario.php");
                 }
-                if(isset($_GET['id_mat'])){
-                    $_SESSION['id_mat'] = filter_var($_GET['id_mat'],FILTER_SANITIZE_STRING);
+                if (isset($_GET['id_mat'])) {
+                    $_SESSION['id_mat'] = filter_var($_GET['id_mat'], FILTER_SANITIZE_STRING);
                     $_GET = array();
-					header("Location: profesor_asignarcuestionario.php");
-                }		
-			
-                if(isset($_GET['id_cue']))
-                {
-                    $_SESSION['id_cue']=filter_var($_GET['id_cue'],FILTER_SANITIZE_STRING);
+                    header("Location: profesor_asignarcuestionario.php");
+                }
+
+                if (isset($_GET['id_cue'])) {
+                    $_SESSION['id_cue']=filter_var($_GET['id_cue'], FILTER_SANITIZE_STRING);
                     header("Location: generarPDF.php");
                     $_GET=array();
                 }
-                
-                if(isset($_GET['id_cue2']))
-                {
-                    $_SESSION['id_cue2']=filter_var($_GET['id_cue2'],FILTER_SANITIZE_STRING);
+
+                if (isset($_GET['id_cue2'])) {
+                    $_SESSION['id_cue2']=filter_var($_GET['id_cue2'], FILTER_SANITIZE_STRING);
                     header("Location: generarDOC.php");
                     $_GET=array();
-                }			
+                }
 
-            ?>   		
-	</script>  
+            ?>
+	</script>
 
 
 </head>
@@ -163,26 +161,23 @@
                     <div class="row pl-md-3 pr-md-3">
                         <!-- Area Chart -->
                         <div class="col">
-                           				
-                           <?php 
-	
-                           try{
-							   
 
-							   	$statement1 = $conexion->prepare("SELECT nick_profesor, materia.clave, nombre, semestre FROM profesor_materia,materia WHERE profesor_materia.clave=materia.clave AND AES_DECRYPT(nick_profesor,'$llave') = :usuario ;");
-								$statement1->execute(array(':usuario' => $usuario));
-							   
-								while($reg = $statement1->fetch() ){
-									
-									$nom_mat=utf8_encode($reg['nombre']);
-									
-									$id=utf8_encode($reg['clave']);
+<?php
 
-									echo "<div class='card shadow border-left-success mb-4'>";
-									echo "<div class='card-header'><h5 class='m-0 text-gray-800'>$nom_mat </h5></div>";
-									
-									echo "<div class='card-body'>
-									
+  try {
+      $statement1 = $conexion->prepare("SELECT nick_profesor, materia.clave, nombre, semestre FROM profesor_materia,materia WHERE profesor_materia.clave=materia.clave AND AES_DECRYPT(nick_profesor,'$llave') = :usuario ;");
+      $statement1->execute(array(':usuario' => $usuario));
+
+      while ($reg = $statement1->fetch()) {
+          $nom_mat = $reg['nombre'];
+
+          $id = $reg['clave'];
+
+          echo "<div class='card shadow border-left-success mb-4'>";
+          echo "<div class='card-header'><h5 class='m-0 text-gray-800'>$nom_mat </h5></div>";
+
+          echo "<div class='card-body'>
+
                                     		<div class='row'>
 												<div class='col-xs-12'>
                                             		<a href='#reac$id' class='btn btn-outline-success' data-toggle='modal'><i
@@ -193,9 +188,9 @@
 													<a id='$id' onclick='obtenerid_mat(this);' href='#' class='btn btn-outline-success' ><i class='fas fa-fw fa-user-plus'></i>&nbsp;Asignar cuestionarios</a>
                                         		</div>
                                     		</div>";
-									
-									
-							echo "<form action='precarga_cuestionario.php' method='POST'>
+
+
+          echo "<form action='precarga_cuestionario.php' method='POST'>
 
 								  <div class='modal fade' id='reac$id' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel'
 										aria-hidden='true'>
@@ -209,7 +204,7 @@
 													<div class='text-center'><h4>Datos del cuestionario</h4></div>
 													<input type='hidden' name='nombre_mat' value='$nom_mat'></input>
 													<input type='hidden' name='id_mat' value='$id'></input>
-						
+
 													<div class='row m-4 form-label-group'>
 														<input type='text' id='nombrecuestionario' class='form-control' name='nombre_cuestionario' placeholder='Nombre del reactivo'
 															required='required' autofocus='autofocus'>
@@ -227,7 +222,7 @@
 													<div class='row ml-3 mr-3 '>
 														<div class='col-5'><input type='date' id='fecha_inicio' class='form-control' name='fecha_inicio' required='required'></div>
 														<div class='col-2 text-center'><p>hasta</p></div>
-														<div class='col-5'><input type='date' id='fecha_fin' class='form-control' name='fecha_fin' required='required'> 
+														<div class='col-5'><input type='date' id='fecha_fin' class='form-control' name='fecha_fin' required='required'>
 														</div>
 													</div>
 												</div>
@@ -238,9 +233,9 @@
 											</div>
 										</div>
 									</div>
-									</form>";									
-									
-									echo "<div class='row pt-2 table-responsive'>
+									</form>";
+
+          echo "<div class='row pt-2 table-responsive'>
 												<table class='table table-striped'>
 													<thead>
 														<tr>
@@ -253,61 +248,52 @@
 														</tr>
 													</thead>
 													<tbody>";
-									
-									$statement2 = $conexion->prepare("SELECT nick_profesor, id_cuestionario, nombre, complejidad, fecha_creacion, estado, clave FROM cuestionario NATURAL JOIN  profesor WHERE AES_DECRYPT(nick_profesor,'$llave') = :usuario ;");
-									$statement2->execute(array(':usuario' => $usuario));
-									
-									$c_cont=0;
-									
-									while($reg2 = $statement2->fetch()){
-										
-										$id_cuest = utf8_encode($reg2['id_cuestionario']);
-										$nom_cue = utf8_encode($reg2['nombre']);
-										$fech_creac = utf8_encode($reg2['fecha_creacion']);
-										$complejidad = utf8_encode($reg2['complejidad']);
-										$estado = utf8_encode($reg2['estado']);
-										$clave = utf8_encode($reg2['clave']);	
 
-										if($id == $clave){
-										echo "   <tr>
+          $statement2 = $conexion->prepare("SELECT nick_profesor, id_cuestionario, nombre, complejidad, fecha_creacion, estado, clave FROM cuestionario NATURAL JOIN  profesor WHERE AES_DECRYPT(nick_profesor,'$llave') = :usuario ;");
+          $statement2->execute(array(':usuario' => $usuario));
+
+          $c_cont=0;
+
+          while ($reg2 = $statement2->fetch()) {
+              $id_cuest = $reg2['id_cuestionario'];
+              $nom_cue = $reg2['nombre'];
+              $fech_creac = $reg2['fecha_creacion'];
+              $complejidad = $reg2['complejidad'];
+              $estado = $reg2['estado'];
+              $clave = $reg2['clave'];
+
+              if ($id == $clave) {
+                  echo "   <tr>
 													<th scope='row'>$nom_cue</th>
 													<td>$fech_creac</td>
 													<td>$complejidad</td>
-													
+
 													<td>[<a id='$id_cuest' href='#' onclick='valorId2(this)'>PDF</a>]</td>
-													
+
 													<td>";
-													switch($estado){
-														case 0: echo "No asignado"; break;
-														case 1: echo "Habilitado"; break;
-														case 2: echo "Deshabilitado"; break;
-													}
-													
-										echo"		</td>
+                  switch ($estado) {
+                    case 0: echo "No asignado"; break;
+                    case 1: echo "Habilitado"; break;
+                    case 2: echo "Deshabilitado"; break;
+                 }
+
+                  echo"		</td>
 													<td><a id='$id_cuest' onclick='obtenerideditar(this);' href='#' >Editar</a></td>
-												</tr>";												
-										}
-									}
-												   
-									echo	   		"</tbody>
+												</tr>";
+              }
+          }
+
+          echo	   		"</tbody>
 												</table>
 											</div>
 									     </div>
 									     </div>";
-									
+      }
+  } catch (PDPException $e) {
+      echo $e->getMessage();
+  }
 
-									
-								}
-							   
-							   
-                           }catch(PDPException $e){
-                           		echo $e->getMessage();
-                           }
-						   
-						   ?>
-						   
-		
-   
+                           ?>
 
                         </div>
 
@@ -316,7 +302,7 @@
                 </div>
                 <!-- /.container-fluid -->
 
-           
+
             </div>
             <!-- End of Main Content -->
 
@@ -347,7 +333,7 @@
 
 
 
-    
+
 
 
 
@@ -466,10 +452,10 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-    
-               
-             
-    
+
+
+
+
 
 </body>
 

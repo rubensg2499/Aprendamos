@@ -232,47 +232,45 @@
     <script src="js/sb-admin-2.min.js"></script>
 
     <?php
-        if($banderaMsg != NULL){
-            if($banderaMsg === 'pregNovalida'){
-                echo "<script>";         
+        if ($banderaMsg != null) {
+            if ($banderaMsg === 'pregNovalida') {
+                echo "<script>";
                 echo 'document.getElementById("pregNovalida").click();';
                 echo "</script>";
                 $banderaMsg = '';
-            }else if($banderaMsg === 'usuarioInhabilitado'){
-                echo "<script>";         
+            } elseif ($banderaMsg === 'usuarioInhabilitado') {
+                echo "<script>";
                 echo 'document.getElementById("usuarioInhabilitado").click();';
                 echo "</script>";
                 $banderaMsg = '';
-            }else if($banderaMsg === 'respIncorrecta'){
-                echo "<script>";         
+            } elseif ($banderaMsg === 'respIncorrecta') {
+                echo "<script>";
                 echo 'document.getElementById("respIncorrecta").click();';
                 echo "</script>";
                 $banderaMsg = '';
-            }else if($banderaMsg === 'pregIncorrecta'){
-                echo "<script>";         
+            } elseif ($banderaMsg === 'pregIncorrecta') {
+                echo "<script>";
                 echo 'document.getElementById("pregIncorrecta").click();';
                 echo "</script>";
                 $banderaMsg = '';
-            }else if($banderaMsg === 'datosEnviados'){
-                echo "<script>";         
+            } elseif ($banderaMsg === 'datosEnviados') {
+                echo "<script>";
                 echo 'document.getElementById("datosEnviados").click();';
                 echo "</script>";
                 $banderaMsg = '';
-            }
-            else if($banderaMsg === 'usuarioInvalido'){
-                echo "<script>";         
+            } elseif ($banderaMsg === 'usuarioInvalido') {
+                echo "<script>";
                 echo 'document.getElementById("usuarioInvalido").click();';
                 echo "</script>";
                 $banderaMsg = '';
-            }
-            else if($banderaMsg === 'mailerError'){
-                echo "<script>";         
+            } elseif ($banderaMsg === 'mailerError') {
+                echo "<script>";
                 echo 'document.getElementById("mailerError).click();';
                 echo "</script>";
                 $banderaMsg = '';
             }
         }
-       
+
     ?>
 </body>
 

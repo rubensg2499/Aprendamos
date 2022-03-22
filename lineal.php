@@ -9,65 +9,63 @@
 	}
 
 </script>
-<?php 
-	include("conexion.php"); 
-	$statement0 = $conexion->prepare("SELECT DISTINCT materia.nombre 
-	FROM alumno_realiza_cuestionario,cuestionario,materia WHERE 
-	alumno_realiza_cuestionario.id_cuestionario=cuestionario.id_cuestionario 
+<?php
+    include("conexion.php");
+    $statement0 = $conexion->prepare("SELECT DISTINCT materia.nombre
+	FROM alumno_realiza_cuestionario,cuestionario,materia WHERE
+	alumno_realiza_cuestionario.id_cuestionario=cuestionario.id_cuestionario
 	and cuestionario.clave=materia.clave");
-	$statement0->execute();
-	$datosX=null;
-	$datosY=null;
-	while ($registro = $statement0->fetch()) {
-		$nombre = $registro['nombre'];
-		echo "<div class='card shadow mb-4 ''>
+    $statement0->execute();
+    $datosX=null;
+    $datosY=null;
+    while ($registro = $statement0->fetch()) {
+        $nombre = $registro['nombre'];
+        echo "<div class='card shadow mb-4 ''>
 				<div class='card border-left-success m-3'>
                 	<div class='card-header py-3 text-gray-800'>
-                    <h5>".utf8_encode($nombre)."</h5>";
+                    <h5>".$nombre."</h5>";
 
-		
-		echo "</div>";
-		echo "<div class='card-body'>";
-		echo "<div>";
-		$statement = $conexion->prepare("SELECT aciertos,errores,cuestionario.nombre FROM alumno_realiza_cuestionario,cuestionario,materia WHERE alumno_realiza_cuestionario.id_cuestionario=cuestionario.id_cuestionario and cuestionario.clave=materia.clave and materia.nombre='$nombre';");
-		$statement->execute();
-		$valoresX = array();
-		$valoresY = array();
-		$valoresX_e = array();
-		$valoresY_e = array();
- 		while($registro2 = $statement->fetch()){
-			$aciertos = $registro2['aciertos'];
-			$errores = $registro2['errores'];
-			$cien = $aciertos+$errores;
-			if($cien==0){
-				$aciertos=0;
-				$errores=0;
-				$valoresY[]=0;
-				$valoresY_e[]=0;
-				$valoresX[]=$registro2['nombre'];
-				$valoresX_e[]=$registro2['nombre'];
-			}else{
-				$progreso = $aciertos*100/$cien;
-				$retraso = $errores*100/$cien;
-				$valoresY[]=(int)$progreso;
-				$valoresY_e[]=100-((int)$progreso);
-				$valoresX[]=$registro2['nombre'];
-				$valoresX_e[]=$registro2['nombre'];
-			}
-			
-			
-		}
-		$datosX=json_encode($valoresX);
-		$datosY=json_encode($valoresY);
-		$datosX_e=json_encode($valoresX_e);
-		$datosY_e=json_encode($valoresY_e);
-		echo "<div id = '$nombre' style='width:100%'></div>";
-		echo "<script>";
-			echo "datosX = crearCadenaLineal('$datosX');";
-			echo "datosY = crearCadenaLineal('$datosY');";
-			echo "datosX_e = crearCadenaLineal('$datosX_e');";
-			echo "datosY_e = crearCadenaLineal('$datosY_e');";
-			echo "var aciertos = {
+
+        echo "</div>";
+        echo "<div class='card-body'>";
+        echo "<div>";
+        $statement = $conexion->prepare("SELECT aciertos,errores,cuestionario.nombre FROM alumno_realiza_cuestionario,cuestionario,materia WHERE alumno_realiza_cuestionario.id_cuestionario=cuestionario.id_cuestionario and cuestionario.clave=materia.clave and materia.nombre='$nombre';");
+        $statement->execute();
+        $valoresX = array();
+        $valoresY = array();
+        $valoresX_e = array();
+        $valoresY_e = array();
+        while ($registro2 = $statement->fetch()) {
+            $aciertos = $registro2['aciertos'];
+            $errores = $registro2['errores'];
+            $cien = $aciertos+$errores;
+            if ($cien==0) {
+                $aciertos=0;
+                $errores=0;
+                $valoresY[]=0;
+                $valoresY_e[]=0;
+                $valoresX[]=$registro2['nombre'];
+                $valoresX_e[]=$registro2['nombre'];
+            } else {
+                $progreso = $aciertos*100/$cien;
+                $retraso = $errores*100/$cien;
+                $valoresY[]=(int)$progreso;
+                $valoresY_e[]=100-((int)$progreso);
+                $valoresX[]=$registro2['nombre'];
+                $valoresX_e[]=$registro2['nombre'];
+            }
+        }
+        $datosX=json_encode($valoresX);
+        $datosY=json_encode($valoresY);
+        $datosX_e=json_encode($valoresX_e);
+        $datosY_e=json_encode($valoresY_e);
+        echo "<div id = '$nombre' style='width:100%'></div>";
+        echo "<script>";
+        echo "datosX = crearCadenaLineal('$datosX');";
+        echo "datosY = crearCadenaLineal('$datosY');";
+        echo "datosX_e = crearCadenaLineal('$datosX_e');";
+        echo "datosY_e = crearCadenaLineal('$datosY_e');";
+        echo "var aciertos = {
 					x: datosX,
 					y: datosY,
 					name: '(%)Aciertos',
@@ -81,7 +79,7 @@
 			            size: 12,
 			        }
 				};";
-			echo "var errores = {
+        echo "var errores = {
 					x: datosX_e,
 					y: datosY_e,
 					name: '(%)Errores',
@@ -95,7 +93,7 @@
 			            size: 12,
 			        }
 				};";
-			echo "var layout = {
+        echo "var layout = {
 				        xaxis: {
 				            title: 'Cuestionario'
 				        },
@@ -103,12 +101,12 @@
 				            title: 'Progreso'
 				        }
 				    };";
-			echo "var data = [aciertos,errores];
+        echo "var data = [aciertos,errores];
 					Plotly.newPlot('$nombre',data,layout);";
-		echo "</script>";
-		echo "</div>";
+        echo "</script>";
+        echo "</div>";
         echo "</div></div></div>";
-	}	
+    }
 ?>
 
 

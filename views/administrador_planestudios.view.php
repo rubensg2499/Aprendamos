@@ -26,8 +26,8 @@
             }
 
             <?php
-                if(isset($_GET['idMateria'])){
-                    $_SESSION['idMateria'] = filter_var($_GET['idMateria'],FILTER_SANITIZE_STRING);
+                if (isset($_GET['idMateria'])) {
+                    $_SESSION['idMateria'] = filter_var($_GET['idMateria'], FILTER_SANITIZE_STRING);
                     header("Location: administrador_editarmateria.php");
                     $_GET = array();
                 }
@@ -199,7 +199,7 @@
                                                     <tr>
                                                       <th scope="row" class="text-center"><?php echo $fila['nombre']; ?></th>
                                                       <td class="text-center"><?php echo $fila['clave']; ?></td>
-                                                      
+
                                                       <td class="text-center"><?php echo $fila['horas']; ?></td>
                                                       <?php if ($resultado): ?>
                                                         <td class="text-center"><?php echo $resultado['nombre'].' '.$resultado['ape_pat'].' '.$resultado['ape_mat'];?></td>

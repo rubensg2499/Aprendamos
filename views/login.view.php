@@ -106,10 +106,10 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
     <?php
-    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($resultado === false) {
             echo "<script>";
-                echo 'document.getElementById("m1").click();';
+            echo 'document.getElementById("m1").click();';
             echo "</script>";
         }
     }

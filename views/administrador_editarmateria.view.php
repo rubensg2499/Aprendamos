@@ -21,7 +21,7 @@
 
     <!-- Custom styles for this template-->
 
-    <link rel="stylesheet" href="css/sb-admin.css">
+    <link href="css/sb-admin.css" rel="stylesheet">
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
@@ -156,15 +156,16 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group">
+                                                <!--<div class="form-group">
                                                     <div class="form-label-group">
                                                         <input type="number" name="CreditoMateria" id="CreditoMateria" class="form-control"
-                                                            value="<?php echo $creditos; ?>" required="required"
+                                                            value="<?php //echo $creditos; ?>" required="required"
                                                             autofocus="autofocus">
                                                         <label for="CreditoMateria">Créditos de la materia</label>
 
                                                     </div>
-                                                </div>
+                                                </div>-->
+
                                                 <div class="form-group">
                                                     <div class="form-label-group">
                                                         <input type="number" name="HorasMateria" id="HorasMateria" class="form-control"

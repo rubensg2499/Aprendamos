@@ -121,11 +121,11 @@
                     <div class="row pl-md-3 pr-md-3 ">
 
                         <!-- Area Chart -->
-                        
+
                         <div class="col">
-                        	
+
                             <div class="card shadow mb-4">
-								
+
                                 <!-- Card Body -->
                                 <div class="card border-left-success m-3">
                                     <div class="card-header text-gray-800 ">
@@ -140,26 +140,26 @@
                                             </div>
                                             <div class="col-md-6 text-center">Fin
                                                 <hr>
-                                                <input id="fin1" name="fin1" required class="form-control text-center" 
+                                                <input id="fin1" name="fin1" required class="form-control text-center"
                                                     type="date" value="<?php echo $per1 ? $per1['fecha_fin'] : '' ?>">
                                             </div>
                                             <div class="col-md-12 text-right ">
                                                 <input href="#establecer1" type="submit" class="btn btn-success" name="establecer1" value="Establecer">
                                                 <a id="m1" href="#mensaje1" data-toggle="modal"></a>
                                             </div>
-                                        </form> 	 
+                                        </form>
 
                                     </div>
 
-                                    
-                                   
+
+
                                 </div>
 
                             </div>
-                            
+
 
                         </div>
-                        
+
                         <div class="col-xl-12">
                             <div class="card shadow mb-4">
 
@@ -185,7 +185,7 @@
                                             <input href="#establecer2" type="submit" class="btn btn-success" name="establecer2" value="Establecer">
                                             <a id="m2" href="#mensaje2" data-toggle="modal"></a>
                                         </div>
-                                    	</form> 	 
+                                    	</form>
 
                                     </div>
 
@@ -299,9 +299,8 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
     <?php
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            
-            if($finalizo1){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($finalizo1) {
                 echo "<script>";
                 echo 'document.getElementById("m1").click();';
                 echo "</script>";

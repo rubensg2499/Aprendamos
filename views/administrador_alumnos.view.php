@@ -168,21 +168,14 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody id="Tabla">
-                                                    <?php
-
-                                                    foreach ($registro as $fila) {
-                                                            echo "
-                                                            <tr>
-                                                                <th scope='row' class='text-center'><input type='checkbox' class='chk1' id='".$fila['nick_usuario']."' name='checkSelect[]' value='".$fila['nick_usuario']."'> </th>
-                                                                <td class='text-center' for='".$fila['nick_usuario']."'>".$fila['matricula']."</td>
-                                                                <td class='text-center'>".$fila['nombre']." ".$fila['ape_pat']." ".$fila['ape_mat']."</td>
-                                                                <td class='text-center'>".$fila['grupo']."</td>
-                                                            </tr>";
-                                                    }
-
-                                                    ?>
-
-
+                                                  <?php foreach ($registro as $fila): ?>
+                                                    <tr>
+                                                      <th scope="row" class="text-center"><input type="checkbox" class="chk1" id="<?php echo $fila['nick_usuario']; ?>" name="checkSelect[]" value="<?php echo $fila['nick_usuario']; ?>"></th>
+                                                      <td class="text-center" for="<?php echo $fila['nick_usuario']; ?>"><?php echo $fila['matricula']; ?></td>
+                                                      <td class="text-center"><?php echo $fila['nombre'].' '.$fila['ape_pat'].' '.$fila['ape_mat']; ?></td>
+                                                      <td class="text-center"><?php echo $fila['grupo']; ?></td>
+                                                    </tr>
+                                                  <?php endforeach; ?>
                                                 </tbody>
                                             </table>
 
@@ -275,21 +268,14 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody id="Tabla2">
-                                                    <?php
-
-                                                    foreach ($registro2 as $fila2) {
-                                                            echo "
-                                                            <tr>
-                                                                <th scope='row' class='text-center'><input type='checkbox' class='chk2' id='".$fila2['nick_usuario']."' name='checkSelect2[]' value='".$fila2['nick_usuario']."'></th>
-                                                                <td class='text-center' for='".$fila2['nick_usuario']."'>".$fila2['matricula']."</td>
-                                                                <td class='text-center'>".$fila2['nombre']." ".$fila2['ape_pat']." ".$fila2['ape_mat']."</td>
-                                                                <td class='text-center'>".$fila2['grupo']."</td>
-                                                            </tr>";
-                                                    }
-
-                                                    ?>
-
-
+                                                  <?php foreach ($registro2 as $fila2): ?>
+                                                    <tr>
+                                                        <th scope="row" class="text-center"><input type="checkbox" class="chk2" id="<?php echo $fila2['nick_usuario']; ?>" name="checkSelect2[]" value="<?php echo $fila2['nick_usuario']; ?>"></th>
+                                                        <td class="text-center" for="$fila2['nick_usuario']"><?php echo $fila2['matricula']; ?></td>
+                                                        <td class="text-center"><?php echo $fila2['nombre'].' '.$fila2['ape_pat'].' '.$fila2['ape_mat']; ?></td>
+                                                        <td class="text-center"><?php echo $fila2['grupo']; ?></td>
+                                                    </tr>
+                                                  <?php endforeach; ?>
                                                 </tbody>
                                         </table>
                                     </div>

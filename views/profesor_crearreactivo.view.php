@@ -61,7 +61,7 @@
                                     <div class="row pl-3">
                                         <h5>Tipo de Reactivo :
                                             <?php
-                                            switch($_POST['tipo_reactivo']){
+                                            switch ($_POST['tipo_reactivo']) {
                                                 case "1":
                                                     $_SESSION['tipo_reactivo'] = "Directo";
                                                     echo " Directo";
@@ -81,7 +81,7 @@
                                     <div class="row pl-3">
                                         <h5>Complejidad:
                                             <?php
-                                            switch($_POST['complejidad_reactivo']){
+                                            switch ($_POST['complejidad_reactivo']) {
                                                 case "1":
                                                     $_SESSION['complejidad_reactivo'] = "Básico";
                                                     echo " Básico";
@@ -217,7 +217,7 @@
                                 </div>
                                 <div class="card-body py-3 align-items-center justify-content-between">
                                     <?php
-                                            switch($_POST['tipo_reactivo']){
+                                            switch ($_POST['tipo_reactivo']) {
                                                 case "1":
                                                     echo " <p>Las preguntas directas se construyen de la siguiente manera. Escriba la pregunta y dentro de los cuadros de texto coloqué una única respuesta por cada opción.
                                                     <br>Ejemplo:

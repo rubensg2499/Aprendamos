@@ -1,7 +1,8 @@
 <?php
+
     session_start();
-	require_once __DIR__ . '/vendor/autoload.php';
-    
+    require_once __DIR__ . '/vendor/autoload.php';
+
     include("formato.php");
     // Create an instance of the class:
     $mpdf = new \Mpdf\Mpdf(
@@ -13,4 +14,3 @@
     $mpdf->WriteHTML($contenido, \Mpdf\HTMLParserMode::HTML_BODY);
 
     $mpdf->Output();
-?>
