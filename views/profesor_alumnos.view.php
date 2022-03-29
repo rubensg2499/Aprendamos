@@ -1,6 +1,6 @@
-<?php 
-        if(isset($_GET['alumno'])){
-            $_SESSION['alumno'] = filter_var($_GET['alumno'],FILTER_SANITIZE_STRING);
+<?php
+        if (isset($_GET['alumno'])) {
+            $_SESSION['alumno'] = filter_var($_GET['alumno'], FILTER_SANITIZE_STRING);
             header("Location: profesor_repositoriomateria.php");
             $_GET = array();
         }
@@ -117,28 +117,28 @@
 
                         <!-- Area Chart -->
                         <div class="col">
-                            <?php foreach($materias as $materia):?>
+                            <?php foreach ($materias as $materia):?>
                             <div class="card shadow border-left-success mb-3">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header">
-                                    <h5 class="m-0 text-gray-900"><?php echo utf8_encode($materia['nombre']);?></h5>
+                                    <h5 class="m-0 text-gray-900"><?php echo $materia['nombre'];?></h5>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body ">
                                     <div class="list-group">
-                                        <?php 
+                                        <?php
                                             $clave = $materia['clave'];
                                             $consulta1 = $conexion->prepare("SELECT AES_DECRYPT(usuario.nick_usuario,'llave') as nick_usuario,usuario.nombre,
-                                            usuario.ape_pat, usuario.ape_mat FROM alumno_materia,usuario WHERE 
+                                            usuario.ape_pat, usuario.ape_mat FROM alumno_materia,usuario WHERE
                                             alumno_materia.nick_alumno=usuario.nick_usuario AND alumno_materia.clave = $clave;");
                                             $consulta1->execute();
                                             $alumnos = $consulta1->fetchAll();
                                         ?>
-                                        <?php foreach($alumnos as $alumno):?>
-                                        <?php  $nombre = utf8_encode($alumno['nombre']) . " " . utf8_encode($alumno['ape_pat']) . " " . utf8_encode($alumno['ape_mat']);
-                                                $id_alumno = utf8_encode($alumno['nick_usuario'])
+                                        <?php foreach ($alumnos as $alumno):?>
+                                        <?php  $nombre = $alumno['nombre'] . " " . $alumno['ape_pat'] . " " . $alumno['ape_mat'];
+                                                $id_alumno = $alumno['nick_usuario'];
                                         ?>
-                                        <a id = "<?php echo $id_alumno;?>" onclick = "obtenerid(this);" href="" class="list-group-item list-group-item-action"
+                                        <a id = "<?php echo $id_alumno.';'.$clave; ?>" onclick = "obtenerid(this);" href="" class="list-group-item list-group-item-action"
                                             data-toggle="modal">
                                             <div class="row">
                                                 <div class="col-xl-1"><img src="recursos/images/profile50x50.png" alt="Imagen"
@@ -264,9 +264,9 @@
     <script>
         function obtenerid(a){
             var opcion = a.id;
-            window.location.href = "?alumno="+opcion;
+            window.location.href = "profesor_alumno.php?alumno="+opcion;
         }
-    </script>  
+    </script>
 
 </body>
 

@@ -1,6 +1,6 @@
 <?php
-    if(isset($_GET['materia'])){
-        $_SESSION['materia'] = filter_var($_GET['materia'],FILTER_SANITIZE_STRING);
+    if (isset($_GET['materia'])) {
+        $_SESSION['materia'] = filter_var($_GET['materia'], FILTER_SANITIZE_STRING);
         header("Location: alumno_materiacuestionario.php");
         $_GET = array();
     }
@@ -40,7 +40,7 @@
             </a>
             <div class="col-auto ">
                 <div class="sidebar-brand d-flex align-items-center justify-content-center" href="alumno_materia.php">
-                    <?php echo utf8_encode($usuario);?></div>
+                    <?php echo $usuario; ?></div>
             </div>
 
             <!-- Divider -->
@@ -115,12 +115,12 @@
                         <!-- Area Chart -->
                         <div class="col">
                         <?php $i=0;?>
-                            <?php foreach($semestres as $semestre):
-                            $numero = $semestre['semestre']; 
+                            <?php foreach ($semestres as $semestre):
+                            $numero = $semestre['semestre'];
                             ?>
 
                             <div class="card shadow mb-4">
-                                
+
                                 <!-- Card Header - Dropdown -->
                                 <div class="card border-left-success m-3">
 
@@ -145,65 +145,65 @@
                                                     <!-- Content Row -->
                                                     <div class="row">
                                                         <?php
-                                                            $consulta2 = $conexion->prepare("SELECT AES_DECRYPT(alumno.nick_alumno,'llave'), 
-                                                            alumno.grupo ,materia.clave,materia.nombre, materia.semestre, alumno_materia.estado 
-                                                            FROM alumno,alumno_materia,materia WHERE alumno.nick_alumno=alumno_materia.nick_alumno 
+                                                            $consulta2 = $conexion->prepare("SELECT AES_DECRYPT(alumno.nick_alumno,'llave'),
+                                                            alumno.grupo ,materia.clave,materia.nombre, materia.semestre, alumno_materia.estado
+                                                            FROM alumno,alumno_materia,materia WHERE alumno.nick_alumno=alumno_materia.nick_alumno
                                                             AND alumno_materia.clave=materia.clave AND AES_DECRYPT(alumno.nick_alumno,'llave')='$usuario';");
                                                             $consulta2->execute();
                                                             $registros = $consulta2->fetchAll();
                                                         ?>
                                                         <!-- Earnings (Monthly) Card Example -->
-                                                        <?php foreach($registros as $registro):?>
-                                                            <?php if($registro['semestre']==$numero):?>
+                                                        <?php foreach ($registros as $registro):?>
+                                                            <?php if ($registro['semestre']==$numero):?>
                                                                 <div class="col-xl-2 col-md-6 mb-4 mr-4">
                                                                     <div class="card <?php echo $registro['estado']==0 ? 'border-left-secondary' : 'border-left-success'; ?>">
                                                                         <div class="card-body ">
                                                                             <div class="row no-gutters align-items-center">
                                                                                 <div class="col mr-2">
                                                                                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1 text-center">
-                                                                                        <?php if($registro['estado']!=0):?>
-                                                                                            <a onclick="obtenerid(this);" id="<?php echo $registro['clave'];?>" class="text-success" href="#"><?php echo utf8_encode($registro['nombre']);?></a>
+                                                                                        <?php if ($registro['estado']!=0):?>
+                                                                                            <a onclick="obtenerid(this);" id="<?php echo $registro['clave'];?>" class="text-success" href="#"><?php echo $registro['nombre'];?></a>
                                                                                         <?php else:?>
                                                                                         <p class="text-secondary">
-                                                                                        <?php echo utf8_encode($registro['nombre']);?>
+                                                                                        <?php echo $registro['nombre'];?>
                                                                                         </p>
                                                                             <?php endif?>
                                                                                     </div>
                                                                                     <div
                                                                                         class="row no-gutters align-items-center">
                                                                                         <div class="col-auto">
-                                                                                            
+
                                                                                             <?php
                                                                                                 $clave = $registro['clave'];
                                                                                                 $totalcuest_sta = $conexion->prepare("SELECT cuestionario.clave,
-                                                                                                COUNT(alumno_solicita_cuestionario.id_cuestionario) AS totalcues FROM 
+                                                                                                COUNT(alumno_solicita_cuestionario.id_cuestionario) AS totalcues FROM
                                                                                                 cuestionario INNER JOIN alumno_solicita_cuestionario ON cuestionario.id_cuestionario=
                                                                                                 alumno_solicita_cuestionario.id_cuestionario
-                                                                                                WHERE AES_DECRYPT(alumno_solicita_cuestionario.nick_alumno,'llave') = :usuario AND 
-                                                                                                (alumno_solicita_cuestionario.estado = 'En curso' OR alumno_solicita_cuestionario.estado 
+                                                                                                WHERE AES_DECRYPT(alumno_solicita_cuestionario.nick_alumno,'llave') = :usuario AND
+                                                                                                (alumno_solicita_cuestionario.estado = 'En curso' OR alumno_solicita_cuestionario.estado
                                                                                                 = 'Concluido') AND cuestionario.clave = $clave GROUP BY cuestionario.clave;");
                                                                                                 $totalcuest_sta -> execute(array(':usuario'=>$usuario));
                                                                                                 $totalcuest = $totalcuest_sta->fetch();
                                                                                                 $totales=0;
                                                                                                 $avanzados=0;
 
-                                                                                                if($totalcuest){
+                                                                                                if ($totalcuest) {
                                                                                                     $totales = $totalcuest['totalcues'];
                                                                                                 }
-                                                                                                
-                                                                                                
-                                                                                                $avancuest_sta = $conexion->prepare("SELECT cuestionario.clave,COUNT(alumno_solicita_cuestionario.id_cuestionario) AS totalavan FROM 
+
+
+                                                                                                $avancuest_sta = $conexion->prepare("SELECT cuestionario.clave,COUNT(alumno_solicita_cuestionario.id_cuestionario) AS totalavan FROM
                                                                                                 cuestionario INNER JOIN alumno_solicita_cuestionario ON cuestionario.id_cuestionario=alumno_solicita_cuestionario.id_cuestionario
                                                                                                 WHERE AES_DECRYPT(alumno_solicita_cuestionario.nick_alumno,'$llave') = :usuario AND cuestionario.clave = :clave AND alumno_solicita_cuestionario.estado = 'concluido' GROUP BY cuestionario.clave;");
                                                                                                 $avancuest_sta -> execute(array(':usuario'=>$usuario, ':clave'=>$registro['clave']));
                                                                                                 $avancuest = $avancuest_sta->fetch();
                                                                                                 //print_r($avancuest);
-                                                                                                if($avancuest){
+                                                                                                if ($avancuest) {
                                                                                                     $avanzados = $avancuest['totalavan'];
                                                                                                 }
-                                                                                                
+
                                                                                                 $porcentaje=0;
-                                                                                                if($totales!=0){
+                                                                                                if ($totales!=0) {
                                                                                                     $porcentaje=(int)($avanzados*100/$totales);
                                                                                                 }
                                                                                             ?>
@@ -213,7 +213,7 @@
                                                                                             </div>
                                                                                         <div class="col">
                                                                                             <div class="progress progress-sm">
-                                                                                                <div class="progress-bar  <?php echo $registro['estado']==0? 'bg-secondary': 'bg-success'?>"
+                                                                                                <div class="progress-bar  <?php echo $registro['estado']==0 ? 'bg-secondary' : 'bg-success'?>"
                                                                                                     role="progressbar"
                                                                                                     style="width: <?php echo $porcentaje;?>%"
                                                                                                     aria-valuenow="50"
@@ -223,7 +223,7 @@
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                    
+
                                                                             </div>
                                                                         </div>
                                                                     </div>

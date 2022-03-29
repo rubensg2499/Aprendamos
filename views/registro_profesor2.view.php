@@ -185,13 +185,13 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
     <?php
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            if($_SESSION['inputPassword']!==$_SESSION['confirmPassword']){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($_SESSION['inputPassword']!==$_SESSION['confirmPassword']) {
                 echo "<script>";
                 echo 'document.getElementById("m2").click();';
                 echo "</script>";
             }
-            if($finalizo){
+            if ($finalizo) {
                 echo "<script>";
                 echo 'document.getElementById("m1").click();';
                 echo "</script>";
@@ -202,11 +202,11 @@
                 echo "</script>";
             }
         }
-        if(isset($_POST['pregunta'])){
+        if (isset($_POST['pregunta'])) {
             echo "<script>";
             echo 'document.getElementById("combo").selectedIndex = ' . $_POST['pregunta'];
             echo "</script>";
-        }else{
+        } else {
             echo "<script>";
             echo 'document.getElementById("combo").selectedIndex = 0';
             echo "</script>";

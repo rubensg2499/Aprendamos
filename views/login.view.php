@@ -19,12 +19,12 @@
         <div class="row align-items-center">
             <div class="col">
                 <h1 class="display-3 text-success">¡Bienvenido!</h1><br>
-                <p class="lead">Esta plataforma te ofrece una gran variedad de cuestionarios para ayudarte a estudiar en
-                    las materias que se te dificulten</p>
+                <p class="lead">Esta plataforma ofrece una variedad de cuestionarios para ayudar a estudiar en
+                    las materias que generen dificultad en los alumnos.</p>
                 <hr class="my-4">
                 <ul>
-                    <li class="mb-3">Exámenes personalizdos de acuerdo a la dificultad que desees.</li>
-                    <li class="mb-3">Estadísticas en tiempo real de tu desempeño.</li>
+                    <li class="mb-3">Exámenes personalizados de acuerdo a la dificultad deseada.</li>
+                    <li class="mb-3">Estadísticas del desempeño del alumno a través de gráficas.</li>
                 </ul>
                 <div class="text-center d-flex justify-content-between my-4">
                     <a href="http://www.unistmo.edu.mx"><img src="recursos/images/logo1.png" class="rounded float-left"
@@ -105,11 +105,11 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-    <?php 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($resultado === false) {
             echo "<script>";
-                echo 'document.getElementById("m1").click();';
+            echo 'document.getElementById("m1").click();';
             echo "</script>";
         }
     }

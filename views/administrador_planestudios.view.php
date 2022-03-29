@@ -26,8 +26,8 @@
             }
 
             <?php
-                if(isset($_GET['idMateria'])){
-                    $_SESSION['idMateria'] = filter_var($_GET['idMateria'],FILTER_SANITIZE_STRING);
+                if (isset($_GET['idMateria'])) {
+                    $_SESSION['idMateria'] = filter_var($_GET['idMateria'], FILTER_SANITIZE_STRING);
                     header("Location: administrador_editarmateria.php");
                     $_GET = array();
                 }
@@ -179,7 +179,6 @@
                                                     <tr>
                                                         <th scope="col" class="text-center">Nombre</th>
                                                         <th scope="col" class="text-center">Clave</th>
-                                                        <th scope="col" class="text-center">Créditos</th>
                                                         <th scope="col" class="text-center">Horas</th>
                                                         <th scope="col" class="text-center">Profesor</th>
                                                         <th scope="col" class="text-center">Semestre</th>
@@ -188,40 +187,30 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody id="Tabla">
+                                                  <?php foreach ($valores as $fila): ?>
                                                     <?php
-
-                                                    foreach ($valores as $fila) {
-                                                            $idMateria = utf8_encode($fila['clave']);
-                                                            $consulta = $conexion->prepare("SELECT * FROM profesor_materia,profesor,usuario
-                                                            WHERE profesor.nick_profesor=usuario.nick_usuario  and profesor_materia.nick_profesor=
-                                                            profesor.nick_profesor and clave=$idMateria;");
-                                                            $consulta->execute();
-                                                            $resultado = $consulta->fetch();
-
-
-                                                            echo "
-                                                            <tr>
-                                                                <th scope='row' class='text-center'>".$fila['nombre']."</th>
-                                                                <td class='text-center'>".utf8_encode($fila['clave'])."</td>
-                                                                <td class='text-center'>".utf8_encode($fila['creditos'])."</td>
-                                                                <td class='text-center'>".utf8_encode($fila['horas'])."</td>";
-                                                            if($resultado){
-                                                                echo "<td class='text-center'>".utf8_encode($resultado['nombre'])." ".utf8_encode($resultado['ape_pat'])." ".utf8_encode($resultado['ape_mat'])."</td>";
-                                                            }else{
-                                                                echo "<td class='text-center'></td>";
-                                                            }
-                                                                /*echo "
-                                                                <td class='text-center'>".utf8_encode($fila['nombre'])." ".utf8_encode($fila['ape_patP'])." ".utf8_encode($fila['ape_matP'])."</td>
-                                                                ";*/
-                                                            echo    "<td class='text-center'>".utf8_encode($fila['semestre'])."</td>
-                                                                <td class='text-center'>".utf8_encode($fila['grupo'])."</td>
-                                                                <td class='text-center'> <a id='$idMateria' onclick='obtenerideditar(this);' href='#'>Editar</a> </td>
-                                                            </tr>";
-                                                    }
-
+                                                      $idMateria = $fila['clave'];
+                                                      $consulta = $conexion->prepare("SELECT * FROM profesor_materia,profesor,usuario
+                                                      WHERE profesor.nick_profesor=usuario.nick_usuario  and profesor_materia.nick_profesor=
+                                                      profesor.nick_profesor and clave=$idMateria;");
+                                                      $consulta->execute();
+                                                      $resultado = $consulta->fetch();
                                                     ?>
+                                                    <tr>
+                                                      <th scope="row" class="text-center"><?php echo $fila['nombre']; ?></th>
+                                                      <td class="text-center"><?php echo $fila['clave']; ?></td>
 
-
+                                                      <td class="text-center"><?php echo $fila['horas']; ?></td>
+                                                      <?php if ($resultado): ?>
+                                                        <td class="text-center"><?php echo $resultado['nombre'].' '.$resultado['ape_pat'].' '.$resultado['ape_mat'];?></td>
+                                                      <?php else: ?>
+                                                        <td class="text-center"></td>
+                                                      <?php endif; ?>
+                                                      <td class="text-center"><?php echo $fila['semestre']; ?></td>
+                                                      <td class="text-center"><?php echo $fila['grupo']; ?></td>
+                                                      <td class="text-center"><a id="<?php echo $idMateria; ?>" onclick="obtenerideditar(this);" href="#">Editar</a></td>
+                                                    </tr>
+                                                  <?php endforeach; ?>
                                                 </tbody>
                                             </table>
                                         </div>

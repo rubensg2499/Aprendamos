@@ -1,13 +1,13 @@
 <?php
-    if(isset($_GET['id'])){
-        $_SESSION['id'] = filter_var($_GET['id'],FILTER_SANITIZE_STRING);
+    if (isset($_GET['id'])) {
+        $_SESSION['id'] = filter_var($_GET['id'], FILTER_SANITIZE_STRING);
         header("Location: aceptar_solicitud.php");
         $_GET = array();
     }
 ?>
 <?php
-    if(isset($_GET['id2'])){
-        $_SESSION['id2'] = filter_var($_GET['id2'],FILTER_SANITIZE_STRING);
+    if (isset($_GET['id2'])) {
+        $_SESSION['id2'] = filter_var($_GET['id2'], FILTER_SANITIZE_STRING);
         header("Location: denegar_solicitud.php");
         $_GET = array();
     }
@@ -134,7 +134,7 @@
                                 </div>
                                 <!-- Card Body -->
                                 <h5 class="pl-3">Más recientes</h5>
-                                <?php foreach($resultados as $resultado):?>
+                                <?php foreach ($resultados as $resultado):?>
                                 <div class="card border-left-success m-3">
                                     <div class="card-body ">
                                         <div class="row ">
@@ -145,23 +145,23 @@
                                                             class="rounded-circle">
                                                     </div>
                                                     <div class="col-xs-6 col-md-6 col-lg-9">
-                                                        <h6><?php echo utf8_encode($resultado['nombre']." ".$resultado['ape_pat']." ".$resultado['ape_mat'])?></h6>
-                                                        <h6>Solicitud de Cuestionario: <?php echo utf8_encode($resultado['cuestionarion']);?></h6>
+                                                        <h6><?php echo $resultado['nombre']." ".$resultado['ape_pat']." ".$resultado['ape_mat']?></h6>
+                                                        <h6>Solicitud de Cuestionario: <?php echo $resultado['cuestionarion'];?></h6>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-sm-12">
                                                 <h6>Fecha: <?php echo $resultado['fecha'];?></h6>
-                                                <?php if($resultado['estado']=='Esperando'):?>
+                                                <?php if ($resultado['estado']=='Esperando'):?>
                                                 <div class="text-right">
                                                         <a id="<?php echo $resultado['id_cuestionario']. " " . $resultado['nick_alumno']?>" onclick="obtenerid(this);" href="#" class="btn btn-success " data-toggle="modal">
                                                         Aceptar</a>
                                                         <a id="<?php echo $resultado['id_cuestionario']. " " . $resultado['nick_alumno']?>" onclick="obtenerid2(this);" href="#" class="btn btn-danger " data-toggle="modal">
                                                         Denegar</a>
                                                 </div>
-                                                <?php elseif($resultado['estado']=='En curso'):?>
+                                                <?php elseif ($resultado['estado']=='En curso'):?>
                                                 <p class="text-right"><strong>Aceptada</strong></p>
-                                                <?php elseif($resultado['estado']=='Denegado'):?>
+                                                <?php elseif ($resultado['estado']=='Denegado'):?>
                                                     <p class="text-right"><strong>Denegada</strong></p>
                                                 <?php endif?>
                                             </div>
@@ -287,7 +287,7 @@
             window.location.href = "?id2=" + opcion;
         }
     </script>
-    
+
 </body>
 
 </html>

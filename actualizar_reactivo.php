@@ -1,16 +1,17 @@
 <?php
+
     session_start();
     include("conexion.php");
     if (isset($_SESSION['usuario'])) {
         $usuario = $_SESSION['usuario'];
         $id = $_SESSION['reactivo'];
-        $enunciado = utf8_decode(filter_var($_POST['contenido_reactivo'],FILTER_SANITIZE_STRING));
-        $a = utf8_decode(filter_var($_POST['respuesta1'],FILTER_SANITIZE_STRING));
-        $b = utf8_decode(filter_var($_POST['respuesta2'],FILTER_SANITIZE_STRING));
-        $c = utf8_decode(filter_var($_POST['respuesta3'],FILTER_SANITIZE_STRING));
-        $d = utf8_decode(filter_var($_POST['respuesta4'],FILTER_SANITIZE_STRING));
-        $respuesta = utf8_decode(filter_var($_POST['respuesta_correcta'],FILTER_SANITIZE_STRING));
-        $estado = utf8_decode(filter_var($_POST['estado_reactivo'],FILTER_SANITIZE_STRING));
+        $enunciado = filter_var($_POST['contenido_reactivo'], FILTER_SANITIZE_STRING);
+        $a = filter_var($_POST['respuesta1'], FILTER_SANITIZE_STRING);
+        $b = filter_var($_POST['respuesta2'], FILTER_SANITIZE_STRING);
+        $c = filter_var($_POST['respuesta3'], FILTER_SANITIZE_STRING);
+        $d = filter_var($_POST['respuesta4'], FILTER_SANITIZE_STRING);
+        $respuesta = filter_var($_POST['respuesta_correcta'], FILTER_SANITIZE_STRING);
+        $estado = filter_var($_POST['estado_reactivo'], FILTER_SANITIZE_STRING);
         print_r($_SESSION);
         echo "<br>";
         print_r($_POST);
@@ -28,8 +29,7 @@
             ':id' => $id
         ));
         header("Location: profesor_repositoriomateria.php");
-    }else {
+    } else {
         header('Location: index.php');
         die();
     }
-?>

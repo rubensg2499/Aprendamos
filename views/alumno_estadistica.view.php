@@ -17,8 +17,8 @@
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="css/sb-admin.css">
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    
-    <!-- librerias JS -->	
+
+    <!-- librerias JS -->
     <script src="js/jquery-3.3.1.min.js"></script>
 	<script src="js/plotly-latest.min.js"></script>
 

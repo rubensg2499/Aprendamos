@@ -1,6 +1,6 @@
 <?php if (!(isset($_SESSION['idMateria']))) {
    header('Location: administrador_planestudios.php');
-} 
+}
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +21,7 @@
 
     <!-- Custom styles for this template-->
 
-    <link rel="stylesheet" href="css/sb-admin.css">
+    <link href="css/sb-admin.css" rel="stylesheet">
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
@@ -141,7 +141,7 @@
                                                 <div class="form-group">
                                                     <div class="form-label-group">
                                                         <input type="text" id="nombreMateria" name="nombreMateria" class="form-control"
-                                                            value="<?php echo "$nombre"; ?>" required="required"
+                                                            value="<?php echo $nombre; ?>" required="required"
                                                             autofocus="autofocus">
                                                         <label for="nombreMateria">Nombre de la materia</label>
 
@@ -149,40 +149,27 @@
                                                 </div>
 
                                                 <div class="form-group">
-
                                                     <div class="form-label-group">
-
-                                                        <select id="claveMateria" name="claveMateria" class="form-control" required="required"
-                                                             size="1">
-                                    
-                                                            <?php
-                                                          
-                                                                echo "<option value='".utf8_encode($clave)."'>".utf8_encode($clave)." </option>";    
-                                                               
-                                                         
-
-                                                            
-                                                            ?>
+                                                        <select id="claveMateria" name="claveMateria" class="form-control" required size="1">
+                                                          <option value="<?php echo $clave ?>"><?php echo $clave ?></option>
                                                         </select>
-
-
                                                     </div>
-                                                    
                                                 </div>
 
-                                                <div class="form-group">
+                                                <!--<div class="form-group">
                                                     <div class="form-label-group">
                                                         <input type="number" name="CreditoMateria" id="CreditoMateria" class="form-control"
-                                                            value="<?php echo "$creditos"; ?>" required="required"
+                                                            value="<?php //echo $creditos; ?>" required="required"
                                                             autofocus="autofocus">
                                                         <label for="CreditoMateria">Créditos de la materia</label>
 
                                                     </div>
-                                                </div>
+                                                </div>-->
+
                                                 <div class="form-group">
                                                     <div class="form-label-group">
                                                         <input type="number" name="HorasMateria" id="HorasMateria" class="form-control"
-                                                            value="<?php echo "$horas"; ?>"
+                                                            value="<?php echo $horas; ?>"
                                                             required="required" autofocus="autofocus">
                                                         <label for="HorasMateria">Horas totales de la materia</label>
 
@@ -191,62 +178,48 @@
 
                                                 <div class="form-group">
                                                     <div class="form-label-group">
-
-                                                        <select id="ProfeAsig" name="ProfeAsig" class="form-control" value="<?php echo "$nombreP"; ?>" required="required"
-                                                             size="1">
+                                                        <select id="ProfeAsig" name="ProfeAsig" class="form-control" value="<?php echo $nombreP; ?>" required="required" size="1">
                                                             <option value="0">Profesor asignado</option>
-                                                            <?php
-                                                            $indice=1; 
-                                                            foreach ($nombreProf as $regs) {
-                                                                echo "<option value='".utf8_encode($regs['nick_profesor'])."'>".utf8_encode($regs['nombreP'])." ".utf8_encode($regs['ape_patP'])." ".utf8_encode($regs['ape_matP'])."</option>";    
-                                                                $indice++;
-                                                            }
-
-                                                            
-                                                            ?>
+                                                            <?php foreach ($nombreProf as $regs): ?>
+                                                              <?php if ($regs['nick_profesor'] == $nombreP): ?>
+                                                                <option value="<?php echo $regs['nick_profesor']; ?>" selected><?php echo $regs['nombreP'].' '.$regs['ape_patP'].' '.$regs['ape_matP'] ?></option>
+                                                              <?php else: ?>
+                                                                <option value="<?php echo $regs['nick_profesor']; ?>"><?php echo $regs['nombreP'].' '.$regs['ape_patP'].' '.$regs['ape_matP'] ?></option>
+                                                              <?php endif; ?>
+                                                            <?php endforeach; ?>
                                                         </select>
 
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="form-label-group">
-
-                                                        <select id="Grupo" class="form-control" required="required"
-                                                            name="Grupo" size="1">
+                                                        <?php $grupos = [104,204,304,404,504,604,704,804,904,1004]; ?>
+                                                        <select id="Grupo" class="form-control" required="required" name="Grupo" size="1">
                                                             <option value="0">Grupo</option>
-                                                            <option value="4">4</option>
-                                                            <option value="104">104</option>
-                                                            <option value="204">204</option>
-                                                            <option value="304">304</option>
-                                                            <option value="404">404</option>
-                                                            <option value="504">504</option>
-                                                            <option value="604">604</option>
-                                                            <option value="704">704</option>
-                                                            <option value="804">804</option>
-                                                            <option value="904">904</option>
-                                                            <option value="1004">1004</option>
+                                                            <?php foreach ($grupos as $g): ?>
+                                                              <?php if ($grupo == $g): ?>
+                                                                <option value="<?php echo $g; ?>" selected><?php echo $g; ?></option>
+                                                              <?php else: ?>
+                                                                <option value="<?php echo $g; ?>"><?php echo $g; ?></option>
+                                                              <?php endif; ?>
+                                                            <?php endforeach; ?>
                                                         </select>
 
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="form-label-group">
-
-                                                        <select id="Semestre" name="Semestre" class="form-control" required="required"
-                                                            name="deslegable" size="1">
+                                                        <?php $semestres = [1,2,3,4,5,6,7,8,9,10] ?>
+                                                        <select id="Semestre" name="Semestre" class="form-control" required="required" name="deslegable" size="1">
                                                             <option value="0">Semestre </option>
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
-                                                            <option value="6">6</option>
-                                                            <option value="7">7</option>
-                                                            <option value="8">8</option>
-                                                            <option value="9">9</option>
-                                                            <option value="10">10</option>
+                                                            <?php foreach ($semestres as $s): ?>
+                                                              <?php if ($semestre == $s): ?>
+                                                                <option value="<?php echo $s; ?>" selected><?php echo $s; ?></option>
+                                                              <?php else: ?>
+                                                                <option value="<?php echo $s; ?>"><?php echo $s; ?></option>
+                                                              <?php endif; ?>
+                                                            <?php endforeach; ?>
                                                         </select>
-
                                                     </div>
                                                 </div>
 
@@ -254,7 +227,7 @@
                                                     <a href="administrador_planestudios.php" class="btn btn-danger">
                                                         Cancelar </a>
                                                     <input type="submit" class="btn btn-success" name="Actualizar" value="Actualizar">
-                                                    
+
 
 
                                                 </div>

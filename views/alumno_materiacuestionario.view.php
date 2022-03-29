@@ -1,11 +1,11 @@
 <?php
-    if(isset($_GET['cuestionario'])){
-        $_SESSION['cuestionario'] = filter_var($_GET['cuestionario'],FILTER_SANITIZE_STRING);
+    if (isset($_GET['cuestionario'])) {
+        $_SESSION['cuestionario'] = filter_var($_GET['cuestionario'], FILTER_SANITIZE_STRING);
         header("Location: solicitar.php");
         $_GET = array();
     }
-    if(isset($_GET['resolver'])){
-        $_SESSION['resolver'] = filter_var($_GET['resolver'],FILTER_SANITIZE_STRING);
+    if (isset($_GET['resolver'])) {
+        $_SESSION['resolver'] = filter_var($_GET['resolver'], FILTER_SANITIZE_STRING);
         header("Location: alumno_cuestionario.php");
         $_GET = array();
     }
@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="css/sb-admin.css">
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
-    
+
 </head>
 
 <body id="page-top">
@@ -47,7 +47,7 @@
             </a>
             <div class="col-auto ">
                 <div class="sidebar-brand d-flex align-items-center justify-content-center" href="alumno_materia.php">
-                    <?php echo utf8_encode($usuario);?></div>
+                    <?php echo $usuario;?></div>
             </div>
 
 
@@ -139,9 +139,9 @@
                                         <!-- Page Heading -->
                                         <div
                                             class="d-sm-flex align-items-center justify-content-between mb-2 m-2 form-group">
-                                            <h5 class="mb-0 text-gray-800"><?php echo utf8_encode($datos['nombre']);?></h5>
+                                            <h5 class="mb-0 text-gray-800"><?php echo $datos['nombre'];?></h5>
                                             <div>
-                                                <h5 class="mb-0 text-gray-800"><?php echo utf8_encode($datos['profe']);?></h5>
+                                                <h5 class="mb-0 text-gray-800"><?php echo $datos['profe'];?></h5>
                                             </div>
 
                                             <li class="sidebar-search" style="list-style:none;">
@@ -172,37 +172,37 @@
                                                     $consulta3 = $conexion->prepare("SELECT * FROM cuestionario WHERE clave = '$clave';");
                                                     $consulta3->execute();
                                                     $registro3=$consulta3->fetchAll();
-                                                    
+
                                                     ?>
 
-                                                    <?php foreach($registro3 as $registro):?>
+                                                    <?php foreach ($registro3 as $registro):?>
                                                         <?php
                                                         $id_cuest=$registro['id_cuestionario'];
-                                                        $consulta4 = $conexion->prepare("SELECT * FROM  
-                                                        alumno_solicita_cuestionario WHERE id_cuestionario = $id_cuest;");   
+                                                        $consulta4 = $conexion->prepare("SELECT * FROM
+                                                        alumno_solicita_cuestionario WHERE id_cuestionario = $id_cuest;");
                                                         $consulta4->execute();
                                                         $cuestionario = $consulta4->fetch();
                                                         ?>
                                                     <tr>
 
-                                                        <td class="text-center "><?php echo utf8_encode($registro['nombre']); ?></td>
-                                                        <td class="text-center">L&iacute;mite: <?php echo utf8_encode($registro['fecha_fin']);?></td>
-                                                        <td class="text-center"><?php echo utf8_encode($registro['complejidad']); ?></td>
+                                                        <td class="text-center "><?php echo $registro['nombre']; ?></td>
+                                                        <td class="text-center">L&iacute;mite: <?php echo $registro['fecha_fin'];?></td>
+                                                        <td class="text-center"><?php echo $registro['complejidad']; ?></td>
                                                         <td></td>
                                                         <td></td>
                                                         <td></td>
 
                                                         <td>
-                                                            <?php if(!$cuestionario || $cuestionario['estado']=='Denegado'):?>
+                                                            <?php if (!$cuestionario || $cuestionario['estado']=='Denegado'):?>
                                                             <a id="<?php echo $id_cuest;?>" onclick="obtenerid(this);" class="btn btn-success col-md-9 m-0 p-1 text-white">Solicitar</a>
-                                                            <a href="#info2"></a> 
+                                                            <a href="#info2"></a>
                                                             <?php else:?>
-                                                                
-                                                                <?php if($cuestionario['estado']=='Esperando'):?>
+
+                                                                <?php if ($cuestionario['estado']=='Esperando'):?>
                                                                 <p>Solicitud enviada</p>
-                                                                <?php elseif($cuestionario['estado']=='En curso'):?>
+                                                                <?php elseif ($cuestionario['estado']=='En curso'):?>
                                                                 <a id="<?php echo $id_cuest;?>" onclick="iracuestionario(this);" class="btn btn-primary col-md-9 m-0 p-1 text-white">En curso</a>
-                                                                <?php elseif($cuestionario['estado']=='Concluido'):?>
+                                                                <?php elseif ($cuestionario['estado']=='Concluido'):?>
                                                                 <p>Concluido</p>
                                                                 <?php endif?>
                                                             <?php endif?>

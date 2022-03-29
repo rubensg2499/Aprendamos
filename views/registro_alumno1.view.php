@@ -8,9 +8,10 @@
     <title>Registro</title>
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link href="css/sb-admin.css" rel="stylesheet">
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style2.css" />
+    <link rel="stylesheet" href="css/sb-admin.css" >
+    <link rel="stylesheet" href="css/sb-admin-2.min.css">
+
 
 </head>
 
@@ -31,7 +32,7 @@
                                         <div class="form-group">
                                             <div class="form-label-group">
                                                 <input type="text" name="nombre" class="form-control"
-                                                    placeholder="Nombre" required autofocus="autofocus">
+                                                    required autofocus="autofocus" placeholder="">
                                                 <label for="nombre">Nombre</label>
                                             </div>
                                         </div>
@@ -39,7 +40,7 @@
                                         <div class="form-group">
                                             <div class="form-label-group">
                                                 <input type="text" name="ape_pat" class="form-control"
-                                                    placeholder="Apellido paterno" required autofocus="autofocus">
+                                                    required>
                                                 <label for="ape_paterno">Apellido paterno</label>
                                             </div>
                                         </div>
@@ -47,7 +48,7 @@
                                         <div class="form-group">
                                             <div class="form-label-group">
                                                 <input type="text" name="ape_mat" class="form-control"
-                                                    placeholder="Apellido materno" required autofocus="autofocus">
+                                                    required>
                                                 <label for="ape_materno">Apellido materno</label>
                                             </div>
                                         </div>
@@ -56,7 +57,7 @@
                                             <div class="form-label-group">
 
                                                 <input type="date" name="fech_nac" class="form-control"
-                                                    placeholder="Fecha de nacimiento" required>
+                                                  required>
                                                 <label for="fech_nac">Fecha de nacimiento</label>
                                             </div>
                                         </div>
@@ -65,33 +66,30 @@
                                         <div class="form-group">
                                             <div class="form-label-group">
                                                 <input type="text" name="esc_proc" class="form-control"
-                                                    placeholder="Escuela de procedencia" required>
+                                                     required>
                                                 <label for="esc_proc">Escuela de procedencia</label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="form-label-group">
-                                                <input type="number" name="grupo" class="form-control" placeholder="Grupo"
+                                                <input type="number" name="grupo" class="form-control"
                                                     required>
                                                 <label for="grupo">Grupo</label>
                                             </div>
                                         </div>
 
-
                                         <div class="form-group">
                                             <div class="form-row">
                                                 <div class="col-md-6">
                                                     <div class="form-label-group">
-                                                        <input type="number" min="100000000" max="9999999999" name="matricula" class="form-control matricula"
-                                                            placeholder="Matricula">
+                                                        <input type="number" min="100000000" max="9999999999" name="matricula" class="form-control matricula">
                                                         <label for="matricula">Matrícula</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-check">
                                                         <input id="propede" type="checkbox" class="form-check-input" name="prope">
-                                                        <label class="form-check-label"
-                                                            for="exampleCheck1">Propedéutico</label>
+                                                        <label class="form-check-label" for="prope">Propedéutico</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -123,8 +121,8 @@
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
     <script>
