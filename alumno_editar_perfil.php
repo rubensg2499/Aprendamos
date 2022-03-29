@@ -23,8 +23,9 @@
 
         $fechahoy = date('Y-m-d');
         $fechahoy = date('Y-m-d', strtotime($fechahoy));
-        $fechainicio = date('Y-m-d', strtotime($cambiocurso['fecha_inicio']));
-        $fechafinal = date('Y-m-d', strtotime($cambiocurso['fecha_fin']));
+        //Verificar que realmente se pueda cambiar el curso
+        //$fechainicio = date('Y-m-d', strtotime($cambiocurso['fecha_inicio']));
+        //$fechafinal = date('Y-m-d', strtotime($cambiocurso['fecha_fin']));
 
         //----------------imagen de perfil--------------------
         $img_sta = $conexion->prepare("SELECT imagen_perfil FROM alumno WHERE

@@ -138,7 +138,7 @@
                                         <?php  $nombre = $alumno['nombre'] . " " . $alumno['ape_pat'] . " " . $alumno['ape_mat'];
                                                 $id_alumno = $alumno['nick_usuario'];
                                         ?>
-                                        <a id = "<?php echo $id_alumno;?>" onclick = "obtenerid(this);" href="" class="list-group-item list-group-item-action"
+                                        <a id = "<?php echo $id_alumno.';'.$clave; ?>" onclick = "obtenerid(this);" href="" class="list-group-item list-group-item-action"
                                             data-toggle="modal">
                                             <div class="row">
                                                 <div class="col-xl-1"><img src="recursos/images/profile50x50.png" alt="Imagen"
@@ -264,7 +264,7 @@
     <script>
         function obtenerid(a){
             var opcion = a.id;
-            window.location.href = "?alumno="+opcion;
+            window.location.href = "profesor_alumno.php?alumno="+opcion;
         }
     </script>
 

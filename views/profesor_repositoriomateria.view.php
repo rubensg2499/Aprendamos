@@ -53,13 +53,13 @@ if (isset($_GET['reactivo'])) {
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="profesor-cuestionarios.php">
+                <a class="nav-link" href="profesor_cuestionarios.php">
                     <i class="fas fa-fw fa-align-justify"></i>
                     <span>Cuestionarios</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="profesor-avisos.php">
+                <a class="nav-link" href="profesor_avisos.php">
                     <i class="fas fa-fw fa-bell"></i>
                     <span>Avisos</span></a>
             </li>
@@ -136,16 +136,18 @@ if (isset($_GET['reactivo'])) {
                             <div class="card shadow">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header">
-                                    <h5 class="m-0 text-gray-800"><?php if (isset($_SESSION['nombre_asignatura'])) {
-                echo $_SESSION['nombre_asignatura'];
-                if (isset($_GET['valor_filtro']) && $_GET['valor_filtro']=='Propios') {
-                    echo "<h6>(Propios)</h6>";
-                } else {
-                    echo "<h6>(Todos)</h6>";
-                }
-            } else {
-                echo "Todavía no tiene reactivos agregados para esta materia.";
-            } ?>
+                                    <h5 class="m-0 text-gray-800">
+                                      <?php
+                                      if (isset($_SESSION['nombre_asignatura']) && $_SESSION['nombre_asignatura']!="") {
+                                          echo $_SESSION['nombre_asignatura'];
+                                          if (isset($_GET['valor_filtro']) && $_GET['valor_filtro']=='Propios') {
+                                              echo "<h6>(Propios)</h6>";
+                                          } else {
+                                              echo "<h6>(Todos)</h6>";
+                                          }
+                                      } else {
+                                          echo "Todavía no tiene reactivos agregados para esta materia.";
+                                      } ?>
                                     </h5>
                                 </div>
                                 <!-- Card Body -->

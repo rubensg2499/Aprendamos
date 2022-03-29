@@ -38,7 +38,7 @@
             ?>
             <h5><i class="fas fa-book fa-sm"></i> Nombre del Cuestionario:
                 <?php echo $mate['nombre']; if ($preguntas_contestadas==$preguntasxcuestionario) {
-                echo ' (Concluido)';
+                echo ' (Concluído)';
             }?>
             </h5>
         </div>

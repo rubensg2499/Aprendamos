@@ -14,8 +14,8 @@ function format()
     AND m.clave=c.clave;");
     $consulta->execute();
     $registro1 =  $consulta->fetch();
-    $materia = utf8_encode($registro1['mat']);
-    $profesor = utf8_encode($registro1['n'].' '.$registro1['ap'].' '. $registro1['am']);
+    $materia = $registro1['mat'];
+    $profesor = $registro1['n'].' '.$registro1['ap'].' '. $registro1['am'];
     $consulta->execute();
     $registros =  $consulta->fetchAll();
     //var_dump($registros);
@@ -23,8 +23,7 @@ function format()
     <div class="cuestionario">
         <div class="imagenes">
             <div class="izquierda">
-                <img src="images/tit.png" alt="UNISTMO" width="100%" height="">
-            </div>
+            <img src="images/Membrete.svg"></img>
         </div>
         <div class="datos-cuestionario">
             <p>Asignatura: ';
@@ -37,11 +36,11 @@ function format()
         <div class="preguntas">';
     $i=1;
     foreach ($registros as $registro) {
-        $enunciado = utf8_encode($registro['enunciado']);
-        $a = utf8_encode($registro['inciso_a_texto']);
-        $b = utf8_encode($registro['inciso_b_texto']);
-        $c = utf8_encode($registro['inciso_c_texto']);
-        $d = utf8_encode($registro['inciso_d_texto']);
+        $enunciado = $registro['enunciado'];
+        $a =$registro['inciso_a_texto'];
+        $b = $registro['inciso_b_texto'];
+        $c = $registro['inciso_c_texto'];
+        $d = $registro['inciso_d_texto'];
         $contenido.="<div class='pregunta'>
             <p>$i.-$enunciado</p>
                 <ul type='a'>

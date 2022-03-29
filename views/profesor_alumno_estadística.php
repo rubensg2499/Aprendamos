@@ -1,7 +1,7 @@
 <?php
         if (isset($_GET['alumno'])) {
             $_SESSION['alumno'] = filter_var($_GET['alumno'], FILTER_SANITIZE_STRING);
-            header("Location: profesor_repositoriomateria.php");
+            header("Location: profesor_repositorio.php");
             $_GET = array();
         }
     ?>

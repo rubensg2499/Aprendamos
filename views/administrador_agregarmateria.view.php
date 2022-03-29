@@ -146,7 +146,7 @@
                                                     <div class="form-label-group">
                                                         <input type="text" id="ClaveMateria" class="form-control" name="ClaveM"
                                                             placeholder="Clave de la materia" required="required"
-                                                            autofocus="autofocus">
+                                                            autofocus="autofocus" maxlength="4" pattern="\d{1,4}" title="La clave debe contener solo 4 números.">
                                                         <label for="ClaveMateria">Clave de la materia</label>
 
                                                     </div>

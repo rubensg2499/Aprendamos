@@ -14,7 +14,7 @@ if (isset($_SESSION['usuario'])) {
         AND materia.clave = :materia ;");
         $statement1->execute(array(':materia'=>$codigo_materia));
         $nombre_materia = $statement1->fetch();
-        $_SESSION['nombre_asignatura'] = $nombre_materia['nombre'];
+        $_SESSION['nombre_asignatura'] = $nombre_materia==false ? "" : $nombre_materia['nombre'];
         $statement1->execute(array(':materia'=>$codigo_materia));
     }
 
